@@ -3,11 +3,11 @@
   <title>Hexo</title>
   
   
-  <link href="https://witleo.github.io/hexo/atom.xml" rel="self"/>
+  <link href="http://blog.witleo.com/atom.xml" rel="self"/>
   
-  <link href="https://witleo.github.io/hexo/"/>
+  <link href="http://blog.witleo.com/"/>
   <updated>2021-07-20T07:16:47.521Z</updated>
-  <id>https://witleo.github.io/hexo/</id>
+  <id>http://blog.witleo.com/</id>
   
   <author>
     <name>witleo</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>ttt</title>
-    <link href="https://witleo.github.io/hexo/2021/07/20/ttt/"/>
-    <id>https://witleo.github.io/hexo/2021/07/20/ttt/</id>
+    <link href="http://blog.witleo.com/2021/07/20/ttt/"/>
+    <id>http://blog.witleo.com/2021/07/20/ttt/</id>
     <published>2021-07-20T07:14:04.000Z</published>
     <updated>2021-07-20T07:16:47.521Z</updated>
     
@@ -35,14 +35,14 @@
     
     
     
-    <category term="test" scheme="https://witleo.github.io/hexo/tags/test/"/>
+    <category term="test" scheme="http://blog.witleo.com/tags/test/"/>
     
   </entry>
   
   <entry>
     <title></title>
-    <link href="https://witleo.github.io/hexo/2021/07/20/zhe-shi-yi-pian-ce-shi-wen-zhang/"/>
-    <id>https://witleo.github.io/hexo/2021/07/20/zhe-shi-yi-pian-ce-shi-wen-zhang/</id>
+    <link href="http://blog.witleo.com/2021/07/20/zhe-shi-yi-pian-ce-shi-wen-zhang/"/>
+    <id>http://blog.witleo.com/2021/07/20/zhe-shi-yi-pian-ce-shi-wen-zhang/</id>
     <published>2021-07-20T05:47:31.160Z</published>
     <updated>2021-07-20T07:11:27.637Z</updated>
     
@@ -62,8 +62,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://witleo.github.io/hexo/2021/07/20/hello-world/"/>
-    <id>https://witleo.github.io/hexo/2021/07/20/hello-world/</id>
+    <link href="http://blog.witleo.com/2021/07/20/hello-world/"/>
+    <id>http://blog.witleo.com/2021/07/20/hello-world/</id>
     <published>2021-07-20T01:25:00.000Z</published>
     <updated>2021-07-20T05:23:02.100Z</updated>
     
@@ -78,12 +78,12 @@
     
     
     
-    <category term="Markdown" scheme="https://witleo.github.io/hexo/categories/Markdown/"/>
+    <category term="Markdown" scheme="http://blog.witleo.com/categories/Markdown/"/>
     
     
-    <category term="Markdown" scheme="https://witleo.github.io/hexo/tags/Markdown/"/>
+    <category term="Markdown" scheme="http://blog.witleo.com/tags/Markdown/"/>
     
-    <category term="Hexo" scheme="https://witleo.github.io/hexo/tags/Hexo/"/>
+    <category term="Hexo" scheme="http://blog.witleo.com/tags/Hexo/"/>
     
   </entry>
   
