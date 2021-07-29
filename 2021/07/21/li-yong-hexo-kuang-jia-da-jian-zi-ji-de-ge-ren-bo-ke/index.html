@@ -380,6 +380,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -393,7 +396,7 @@
 <h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><blockquote>
 <p>什么是GitHub Pages？<br>GitHub Pages 是直接从 GitHub 存储库托管的静态网站。 但它们不仅仅是静态文件的集合。 通过利用 Jekyll 和 Liquid 等网站生成技术，开发人员可定义被处理为完整静态网站的动态模板。 每次将更改提交到与网站关联的源分支时，都会使用最新更新重新生成该更改，并自动将其发布到目标 URL。</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages官网链接</a><br>简单的说，就是把你的博客网站放在GitHub Pages上进行免费托管，让大家都能访问<br>GitHub Pages也可以换成任意可以托管notejs项目的服务，比如Gitee Pages等等<br>当然，我原本是想使用Gitee Pages的，毕竟国内的访问速度会快很多，但是…<br><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1626857103252.png" alt="Alt text"></p>
+<p><a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages官网链接</a><br>简单的说，就是把你的博客网站放在GitHub Pages上进行免费托管，让大家都能访问<br>GitHub Pages也可以换成任意可以托管notejs项目的服务，比如Gitee Pages等等<br>当然，我原本是想使用Gitee Pages的，毕竟国内的访问速度会快很多，但是…<br><img src="./1626857103252.png" alt="Alt text"></p>
 <p>居然是因为政策法规影响，不得已放弃</p>
 <p>你现在所浏览的博客就是利用hexo+github搭建而成的，并且完全免费，不会产生任何费用（当然，如果你想使用自己的域名，可能会产生相关费用）</p>
 <h1 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h1><h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><blockquote>
@@ -401,39 +404,32 @@
 </blockquote>
 <p>这里默认你已经安装好了Node.js和Git，安装过程不再赘述</p>
 <h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo</p>
-<pre><code>npm install -g hexo-cli
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">npm install -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>注意：-g是指全局安装hexo</p>
 <p>创建一个文件夹，用来存放你的项目代码，进入文件夹内，开始进行hexo 初始化</p>
-<pre><code>hexo init
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">hexo init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这时刷新文件夹就可以看到整个项目的文件目录结构了，然后安装依赖</p>
-<pre><code>npm install
-</code></pre>
-<p>继续下一步，进行构建，构建完成会生成一个public文件夹</p>
-<pre><code>hexo generate
-</code></pre>
-<p><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1626857847132.png" alt="Alt text"></p>
+<pre class="line-numbers language-none"><code class="language-none">npm install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>继续下一步，进行构建，构建完成会生成一个public文件夹<br><img src="./1626857847132.png" alt="Alt text"></p>
 <p>public文件夹内就是我们生成的静态网站内容，我们在部署到github时，就是上传这部分代码<br>这里已经安装并构建完成了，我们可以启动看看效果</p>
-<pre><code>hexo server
-</code></pre>
-<p><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1626858130233.png" alt="Alt text"><br>注：这里看到我执行的是hexo s 实际上是hexo server命令的简写，效果是一样的<br>hexo命令：</p>
+<pre class="line-numbers language-none"><code class="language-none">hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="./1626858130233.png" alt="Alt text"><br>注：这里看到我执行的是hexo s 实际上是hexo server命令的简写，效果是一样的<br>hexo命令：</p>
 <ul>
 <li>hexo clean ##清理</li>
 <li>hexo g ##构建、编译</li>
 <li>hexo s ##启动服务</li>
-<li>hexo d ##上传至服务器<br><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1626858445714.png" alt="Alt text"><br>这就是博客的默认主题页面了，下一步开始进行更换主题</li>
+<li>hexo d ##上传至服务器<br><img src="./1626858445714.png" alt="Alt text"><br>这就是博客的默认主题页面了，下一步开始进行更换主题</li>
 </ul>
-<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>我们可以看到官方默认提供的主题功能并不多，页面也比较简单，当然我们可以自己进行修改，但是官方也提供一些网友自己制作的主题，功能更加丰富，可以直接套用<br><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1627006415456.png" alt="Alt text"></p>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>我们可以看到官方默认提供的主题功能并不多，页面也比较简单，当然我们可以自己进行修改，但是官方也提供一些网友自己制作的主题，功能更加丰富，可以直接套用<br><img src="./1627006415456.png" alt="Alt text"></p>
 <p><a target="_blank" rel="noopener" href="https://hexo.io/themes/">主题选取页面</a></p>
-<p>你可以从官方提供的主题库中选取增加喜欢的主题<br><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1627007882969.png" alt="Alt text"></p>
+<p>你可以从官方提供的主题库中选取增加喜欢的主题<br><img src="./1627007882969.png" alt="Alt text"></p>
 <p>附上我使用的主题链接：<br><a target="_blank" rel="noopener" href="https://blinkfox.github.io/2018/09/28/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/#toc-heading-10">Hexo博客主题之hexo-theme-matery</a></p>
 <p>每个主题内会有安装调试的使用介绍，因为每个主题的设置项不同，这里不再展开复述，请按照主题内教程进行配置</p>
 <h2 id="Hexo扩展插件"><a href="#Hexo扩展插件" class="headerlink" title="Hexo扩展插件"></a>Hexo扩展插件</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote>
 <p>Hexo 有强大的插件系统，使您能轻松扩展功能而不用修改核心模块的源码。</p>
 </blockquote>
 <p>在 Hexo 中有两种形式的插件，脚本（Scripts）和插件（Packages），这里不讨论脚本（Scripts）形式，只介绍和推荐插件（Packages）形式</p>
-<p>扩展插件可以很方便的使我们的博客功能更加丰富<br><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1627008344829.png" alt="Alt text"></p>
+<p>扩展插件可以很方便的使我们的博客功能更加丰富<br><img src="./1627008344829.png" alt="Alt text"></p>
 <p><a target="_blank" rel="noopener" href="https://hexo.io/plugins/">插件列表地址</a></p>
 <p>我们可以看到，官方给出的插件库中足足有385个插件可以使用<br>这些插件都能做什么呢？举个栗子<br>在我所使用的主题中，就应用到了以下几个插件：</p>
 <ul>
@@ -447,16 +443,15 @@
 <h3 id="安装hexo-deployer-git插件"><a href="#安装hexo-deployer-git插件" class="headerlink" title="安装hexo-deployer-git插件"></a>安装hexo-deployer-git插件</h3><blockquote>
 <p>Hexo 的Git 一键部署插件。</p>
 </blockquote>
-<p>我们在插件市场搜索deployer，可以看到官方已经提供了大部分平台的一键部署插件，我们前面选用的是github，所以我们对应的需要使用hexo-deployer-git插件<br><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1627009687046.png" alt="Alt text"></p>
+<p>我们在插件市场搜索deployer，可以看到官方已经提供了大部分平台的一键部署插件，我们前面选用的是github，所以我们对应的需要使用hexo-deployer-git插件<br><img src="./1627009687046.png" alt="Alt text"></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git插件地址</a></p>
 <p><strong>安装</strong></p>
 <hr>
-<pre><code>npm install hexo-deployer-git --save
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">npm install hexo-deployer-git --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>配置项说明</strong></p>
 <hr>
 <p>找到根目录下的文件 _config.yml 配置你的git信息</p>
-<pre><code># You can use this:
+<pre class="line-numbers language-none"><code class="language-none"># You can use this:
 deploy:
   type: git
   repo: &lt;repository url&gt;
@@ -491,46 +486,40 @@ deploy:
     [repo_name]: &lt;repository url&gt;[,branch]
     [repo_name]:
       url: &lt;repository url&gt;
-      branch: [branch]
-</code></pre>
+      branch: [branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>配置项看起来很复杂？我们只需要配置其中简单的几项就可以:</p>
-<pre><code>deploy:
+<pre class="line-numbers language-none"><code class="language-none">deploy:
   type: &#39;git&#39;
-  repository: &#39;https://github.com/witleo/witleo.github.io.git&#39;
-  branch: master
-</code></pre>
+  repository: &#39;https:&#x2F;&#x2F;github.com&#x2F;witleo&#x2F;witleo.github.io.git&#39;
+  branch: master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>注：无论是部署到GitHub Pages，还是Gitee Pages或者GitLab Pages，部署方式都是相同的，你只需要修改你的Git地址就可以了</p>
 <h3 id="安装hexo-admin插件"><a href="#安装hexo-admin插件" class="headerlink" title="安装hexo-admin插件"></a>安装hexo-admin插件</h3><blockquote>
 <p>hexo-admin 是一个Hexo博客引擎的管理用户界面插件。这个插件最初是作为本地编辑器设计的，在本地运行hexo使用hexo-admin编写文章，然后通过hexo g或hexo d（hexo g是本地渲染，hexo d是将渲染的静态页面发布到GitHub）将生成的静态页面发布到GitHub等静态服务器。如果你使用的是非静态托管服务器，比如自己买的主机搭建的hexo，那么一定要设置hexo-admin 的密码，否则谁都可以编辑你的文章。</p>
 </blockquote>
 <p><strong>安装</strong></p>
 <hr>
-<pre><code>npm install hexo-admin --save
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">npm install hexo-admin --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>安装完成后启动hexo</p>
-<pre><code>hexo server
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>打开 <a target="_blank" rel="noopener" href="http://localhost:4000/admin/">http://localhost:4000/admin/</a> 就可以访问到hexo-admin管理页面了</p>
-<p><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1627011252805.png" alt="Alt text"><br>hexo-admin的功能很多，你可以通过后台界面发布文章，修改一些设置项，还可以执行脚本等等，这里不做过多介绍，总之它可以帮助我们更好的管理博客网站</p>
+<p><img src="./1627011252805.png" alt="Alt text"><br>hexo-admin的功能很多，你可以通过后台界面发布文章，修改一些设置项，还可以执行脚本等等，这里不做过多介绍，总之它可以帮助我们更好的管理博客网站</p>
 <h2 id="部署到GitHub-Pages"><a href="#部署到GitHub-Pages" class="headerlink" title="部署到GitHub Pages"></a>部署到GitHub Pages</h2><p>网站已经搭建好了，现在最重要的就是让所有人可以访问你的博客，我们利用GitHub提供的免费Pages服务来实现这一点</p>
-<p>我这里假设你已经注册好了GitHub的账号，并且你可以正常访问GitHub的网址<br>首先，创建一个项目<br><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1627012207600.png" alt="Alt text"><br>这里起名时要注意一点，GitHub Pages提供路径两种方式</p>
+<p>我这里假设你已经注册好了GitHub的账号，并且你可以正常访问GitHub的网址<br>首先，创建一个项目<br><img src="./1627012207600.png" alt="Alt text"><br>这里起名时要注意一点，GitHub Pages提供路径两种方式</p>
 <ol>
 <li>username.github.io</li>
 <li>username.github.io/projectname</li>
 </ol>
-<p>第一种是个人主页，第二种是项目主页<br>每个人只能有一个个人主页，可以有多个项目主页<br>如果你希望使用搭建个人主页（推荐），起名时需要使用： 你的用户名.github.io 这种格式，如下图所示<br><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1627012261870.png" alt="Alt text"></p>
-<p>创建完成后复制你的GitHub地址<br><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1627012958795.png" alt="Alt text"></p>
+<p>第一种是个人主页，第二种是项目主页<br>每个人只能有一个个人主页，可以有多个项目主页<br>如果你希望使用搭建个人主页（推荐），起名时需要使用： 你的用户名.github.io 这种格式，如下图所示<br><img src="./1627012261870.png" alt="Alt text"></p>
+<p>创建完成后复制你的GitHub地址<br><img src="./1627012958795.png" alt="Alt text"></p>
 <p>打开hexo项目根目录下的文件 _config.yml 配置你的git信息</p>
-<pre><code>deploy:
+<pre class="line-numbers language-none"><code class="language-none">deploy:
   type: &#39;git&#39;
-  repository: &#39;https://github.com/witleo/witleo.github.io.git&#39;
-  branch: master
-</code></pre>
+  repository: &#39;https:&#x2F;&#x2F;github.com&#x2F;witleo&#x2F;witleo.github.io.git&#39;
+  branch: master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到GitHub上开启你的Pages服务，设置 - Pages ，路径选择root，然后保存</p>
-<p><img src="%E5%88%A9%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/1627541610280.png" alt="Alt text"><br>我这里的设置使用了自己的域名，如果你有自己的域名，也可以在Custom domain中添加</p>
+<p><img src="./1627541610280.png" alt="Alt text"><br>我这里的设置使用了自己的域名，如果你有自己的域名，也可以在Custom domain中添加</p>
 <p>设置好了之后，回到你的hexo项目目录，执行命令</p>
-<pre><code>hexo deploy 
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">hexo deploy <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>hexo deploy 命令会将public目录的文件强制推送到github上，直接访问我们在Pages显示的地址就可以访问博客了</p>
 <h2 id="编写博文"><a href="#编写博文" class="headerlink" title="编写博文"></a>编写博文</h2><h3 id="使用Markdown编写博文"><a href="#使用Markdown编写博文" class="headerlink" title="使用Markdown编写博文"></a>使用Markdown编写博文</h3><p>首先，我们编写博客的文章需要使用markdown 格式，什么是markdown ？</p>
 <blockquote>
