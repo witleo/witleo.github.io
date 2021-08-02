@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="使用Maven Profile和nacos namespace+group实现环境隔离, Hexo">
+    <meta name="keywords" content="Hello World, Hexo">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>使用Maven Profile和nacos namespace+group实现环境隔离 | Hexo</title>
+    <title>Hello World | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -204,12 +204,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">使用Maven Profile和nacos namespace+group实现环境隔离</h1>
+                    <h1 class="description center-align post-title">Hello World</h1>
                 </div>
             </div>
         </div>
@@ -325,12 +325,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Nacos/">
-                                <span class="chip bg-color">Nacos</span>
+                            <a href="/tags/Hexo/">
+                                <span class="chip bg-color">Hexo</span>
                             </a>
                         
-                            <a href="/tags/Maven/">
-                                <span class="chip bg-color">Maven</span>
+                            <a href="/tags/Markdown/">
+                                <span class="chip bg-color">Markdown</span>
                             </a>
                         
                     </div>
@@ -341,8 +341,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" class="post-category">
-                                乱七八糟
+                            <a href="/categories/Markdown/" class="post-category">
+                                Markdown
                             </a>
                         
                     </div>
@@ -354,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-08-02
+                    2021-07-20
                 </div>
                 
 
@@ -363,14 +363,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    4
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    1 分
                 </div>
                 
 
@@ -388,131 +388,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p> 1.在开发过程中需要修改服务的nacos地址（或其他公共配置）时，需要每个微服务配置文件都改一遍<br> 2.几乎nacos每个微服务的配置文件中都含有相同的配置（例如数据库配置），当需要修改数据库连接地址时每个nacos配置文件都改一遍<br> 3.在不同的项目中会存在相同的模块名(global-auth),会有nacos的Data ID重复的情况<br> 4.对应不同的环境应有多套配置文件（如测试环境、开发环境、linux环境和windows环境等等）<br> 5.在不改动代码的情况下快速发布、部署测试环境的代码</p>
-<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><h2 id="使用Nacos-Namespace进行多环境配置"><a href="#使用Nacos-Namespace进行多环境配置" class="headerlink" title="使用Nacos Namespace进行多环境配置"></a>使用Nacos Namespace进行多环境配置</h2><p>首先，nacos为我们提供了多种环境隔离的方案，可以根据项目规模、参与开发人数和业务规划等多个角度可以确定我们的最优方案</p>
-<blockquote>
-<p>第一种：通过Data ID与profile实现。</p>
-<p>优点：这种方式与Spring Cloud Config的实现非常像，用过Spring Cloud<br>Config的用户，可以毫无违和感的过渡过来，由于命名规则类似，所以要从Spring Cloud Config中做迁移也非常简单。<br>缺点：这种方式在项目与环境多的时候，配置内容就会显得非常混乱。配置列表中会看到各种不同应用，不同环境的配置交织在一起，非常不利于管理。<br>建议：项目不多时使用，或者可以结合Group对项目根据业务或者组织架构做一些拆分规划。<br> 第二种：通过Group实现。</p>
-<p>优点：通过Group按环境讲各个应用的配置隔离开。可以非常方便的利用Data<br>ID和Group的搜索功能，分别从应用纬度和环境纬度来查看配置。<br>缺点：由于会占用Group纬度，所以需要对Group的使用做好规划，毕竟与业务上的一些配置分组起冲突等问题。<br>建议：这种方式虽然结构上比上一种更好一些，但是依然可能会有一些混乱，主要是在Group的管理上要做好规划和控制。<br>第三种：通过Namespace实现。</p>
-<p>优点：官方建议的方式，通过Namespace来区分不同的环境，释放了Group的自由度，这样可以让Group的使用专注于做业务层面的分组管理。同时，Nacos控制页面上对于Namespace也做了分组展示，不需要搜索，就可以隔离开不同的环境配置，非常易用。<br>缺点：没有啥缺点，可能就是多引入一个概念，需要用户去理解吧。<br>建议：直接用这种方式长远上来说会比较省心。虽然可能对小团队而言，项目不多，第一第二方式也够了，但是万一后面做大了呢？<br>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jav_zhangwei/article/details/109728425?spm=1001.2014.3001.5501">Nacos配置细化</a></p>
-</blockquote>
-<p>过程不再讨论，这里直接说结论：<br>Namespace区分环境<br>Group区分项目<br>Data ID区分服务，不再使用profiles<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/20210602142201474.png" alt="在这里插入图片描述"></p>
-<h2 id="Nacos开启shared-configs配置共享，读取多个配置"><a href="#Nacos开启shared-configs配置共享，读取多个配置" class="headerlink" title="Nacos开启shared-configs配置共享，读取多个配置"></a>Nacos开启shared-configs配置共享，读取多个配置</h2><p>在实际项目中，每个子模块中，spring有许多相同配置项，比如Redis,Mysql等等，这些公用配置信息，可以放在同一个配置文件中，方便管理及修改</p>
-<p>将数据库连接和其他公共配置，分别放在两个yml文件中</p>
-<pre class="line-numbers language-none"><code class="language-none"># 1.公共配置
-  shared-configs[0]:
-  data-id: application.$&#123;spring.cloud.nacos.config.file-extension&#125; # 配置文件名-Data Id
-  group: $&#123;nacos.group&#125;   # 默认为DEFAULT_GROUP
-  refresh: true   # 是否动态刷新，默认为false
-# 2.数据库配置
-shared-configs[1]:
-  data-id: datasource.$&#123;spring.cloud.nacos.config.file-extension&#125;
-  group: $&#123;nacos.group&#125;
-  refresh: true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="使用Maven-Profile实现项目内的环境统一"><a href="#使用Maven-Profile实现项目内的环境统一" class="headerlink" title="使用Maven Profile实现项目内的环境统一"></a>使用Maven Profile实现项目内的环境统一</h2><p>在开发过程中，我们的项目会存在不同的运行环境，比如开发环境、测试环境、生产环境，而我们的项目在不同的环境中，有的配置可能会不一样，比如数据源配置、日志文件配置、以及一些软件运行过程中的基本配置，那每次我们将软件部署到不同的环境时，都需要修改相应的配置文件，这样来回修改，很容易出错，而且浪费劳动力。</p>
-<p>pom文件配置如下：</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/resources<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filtering</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filtering</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>includes</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>includes</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profiles</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>dev<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nacos.namespace</span><span class="token punctuation">></span></span>dev<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nacos.namespace</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nacos.group</span><span class="token punctuation">></span></span>HIM_GROUP<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nacos.group</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nacos.server-addr</span><span class="token punctuation">></span></span>127.0.0.1:8838<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nacos.server-addr</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activation</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activeByDefault</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activeByDefault</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activation</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>prod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nacos.namespace</span><span class="token punctuation">></span></span>prod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nacos.namespace</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nacos.group</span><span class="token punctuation">></span></span>HIM_GROUP<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nacos.group</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nacos.server-addr</span><span class="token punctuation">></span></span>192.168.3.10:8838<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nacos.server-addr</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nacos.namespace</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nacos.namespace</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nacos.group</span><span class="token punctuation">></span></span>HIM_GROUP<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nacos.group</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nacos.server-addr</span><span class="token punctuation">></span></span>192.168.3.10:8838<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nacos.server-addr</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profiles</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>bootstrap.yml文件的配置如下：</p>
-<pre class="line-numbers language-none"><code class="language-none"># Spring
-spring:
-  application:
-    # 应用名称
-    name: global-gateway
-  main:
-    allow-bean-definition-overriding: true
-  cloud:
-    nacos:
-      discovery:
-        # 服务注册地址
-        server-addr: $&#123;nacos.server-addr&#125;
-        group: $&#123;nacos.group&#125;
-        namespace: $&#123;nacos.namespace&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>bootstrap.yml文件中对应的&#36;{nacos.server-addr}等即为pom.xml文件的配置值</p>
-<p>其中pom.xml文件中的activation标签代表当前启用的环境，打包时会默认打包activation所标记的环境<br>使用maven打包时可以通过 -P 参数来指定环境<br>例如：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">mvn clean package -P test<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>以上打包命令表示使用测试环境进行打包，这样就可以实现使用打包命令而不改动代码对多个环境进行发布</p>
-<p>或者你还可以通过mvn -Dxxx来指定启动参数<br>例如：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">mvn -Dnacos.server-addr&#x3D;127.0.0.1:8848 -Dnacos.namespace&#x3D;prod  clean package<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>使用Nacos Namespace配置解决了问题3和4<br>shared-configs配置解决了问题2<br>Maven Profile解决了问题1和5</p>
-<p>global-auth服务的完整配置：</p>
-<pre class="line-numbers language-none"><code class="language-none"># Spring
-spring:
-  application:
-    # 应用名称
-    name: global-auth
-  cloud:
-    nacos:
-      discovery:
-        # 服务注册地址
-        server-addr: $&#123;nacos.server-addr&#125;
-        group: $&#123;nacos.group&#125;
-        namespace: $&#123;nacos.namespace&#125;
-      config:
-        # 配置中心地址
-        server-addr: $&#123;nacos.server-addr&#125;
-        # 配置文件格式
-        file-extension: yml
-        group: $&#123;nacos.group&#125;
-        namespace: $&#123;nacos.namespace&#125;
-        # 1.公共配置
-        shared-configs[0]:
-          data-id: application.$&#123;spring.cloud.nacos.config.file-extension&#125; # 配置文件名-Data Id
-          group: $&#123;nacos.group&#125;   # 默认为DEFAULT_GROUP
-          refresh: true   # 是否动态刷新，默认为false
-        # 2.数据库配置
-        shared-configs[1]:
-          data-id: datasource.$&#123;spring.cloud.nacos.config.file-extension&#125;
-          group: $&#123;nacos.group&#125;
-          refresh: true
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jav_zhangwei/article/details/109728425?spm=1001.2014.3001.5501">https://blog.csdn.net/jav_zhangwei/article/details/109728425?spm=1001.2014.3001.5501</a></p>
+                <p>上传测试</p>
 
                 
             </div>
@@ -539,7 +415,7 @@ spring:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://blog.witleo.com/2021/08/02/shi-yong-maven-profile-he-nacos-namespace-group-shi-xian-huan-jing-ge-chi/">http://blog.witleo.com/2021/08/02/shi-yong-maven-profile-he-nacos-namespace-group-shi-xian-huan-jing-ge-chi/</a>
+                    <a href="http://blog.witleo.com/2021/07/20/shang-chuan-ce-shi/">http://blog.witleo.com/2021/07/20/shang-chuan-ce-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -577,12 +453,12 @@ spring:
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Nacos/">
-                                    <span class="chip bg-color">Nacos</span>
+                                <a href="/tags/Hexo/">
+                                    <span class="chip bg-color">Hexo</span>
                                 </a>
                             
-                                <a href="/tags/Maven/">
-                                    <span class="chip bg-color">Maven</span>
+                                <a href="/tags/Markdown/">
+                                    <span class="chip bg-color">Markdown</span>
                                 </a>
                             
                         </div>
@@ -756,13 +632,13 @@ spring:
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/08/02/spring-cloud-gateway-jie-jue-qian-duan-kua-yu-wen-ti/">
+                <a href="/2021/07/20/hello-world/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="spring cloud gateway解决跨域问题">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">spring cloud gateway解决跨域问题</span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -773,14 +649,14 @@ spring:
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-02
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-20
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" class="post-category">
-                                    乱七八糟
+                            <a href="/categories/Markdown/" class="post-category">
+                                    Markdown
                                 </a>
                             
                             
@@ -790,12 +666,12 @@ spring:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/cloud-gateway/">
-                        <span class="chip bg-color">cloud gateway</span>
+                    <a href="/tags/Hexo/">
+                        <span class="chip bg-color">Hexo</span>
                     </a>
                     
-                    <a href="/tags/%E8%B7%A8%E5%9F%9F/">
-                        <span class="chip bg-color">跨域</span>
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
                     </a>
                     
                 </div>
@@ -806,16 +682,16 @@ spring:
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2021/08/02/li-yong-vuex-mixin-you-hua-shu-ju-zi-dian-de-cun-qu-fang-an/">
+                <a href="/2021/07/20/shang-chuan-ce-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="利用vuex+mixin优化数据字典的存取方案">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">利用vuex+mixin优化数据字典的存取方案</span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -826,29 +702,30 @@ spring:
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-20
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" class="post-category">
-                                    乱七八糟
+                            <a href="/categories/Markdown/" class="post-category">
+                                    Markdown
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
+                    <a href="/tags/Hexo/">
+                        <span class="chip bg-color">Hexo</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/">
-                        <span class="chip bg-color">数据字典</span>
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
                     </a>
                     
                 </div>
