@@ -4,33 +4,6 @@
   
     
     <entry>
-      <title>spring cloud gateway解决跨域问题</title>
-      <link href="/2021/08/02/spring-cloud-gateway-jie-jue-qian-duan-kua-yu-wen-ti/"/>
-      <url>/2021/08/02/spring-cloud-gateway-jie-jue-qian-duan-kua-yu-wen-ti/</url>
-      
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前后端分离普遍都会遇到跨域问题，项目内用到了网关模块，所以我们可以在网关中解决。</p><h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>增加以下两个类既可</p><pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.him.gateway.config;import com.him.gateway.filter.CorsResponseHeaderFilter;import org.springframework.context.annotation.Bean;import org.springframework.context.annotation.Configuration;import org.springframework.web.cors.CorsConfiguration;import org.springframework.web.cors.reactive.CorsWebFilter;import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;&#x2F;** * 配置跨域问题 * * @author liaoyuxing * @date 2021-5-20 *&#x2F;@Configurationpublic class CorsConfig &#123;    @Bean    public CorsResponseHeaderFilter corsResponseHeaderFilter() &#123;        return new CorsResponseHeaderFilter();    &#125;    @Bean    public CorsWebFilter corsWebFilter() &#123;        UrlBasedCorsConfigurationSource source &#x3D; new UrlBasedCorsConfigurationSource();        CorsConfiguration corsConfiguration &#x3D; new CorsConfiguration();        corsConfiguration.addAllowedHeader(&quot;*&quot;);        corsConfiguration.addAllowedMethod(&quot;*&quot;);        corsConfiguration.addAllowedOrigin(&quot;*&quot;);        corsConfiguration.setAllowCredentials(true);        corsConfiguration.setMaxAge(600L);        source.registerCorsConfiguration(&quot;&#x2F;**&quot;, corsConfiguration);        return new CorsWebFilter(source);    &#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.him.gateway.filter;import org.springframework.cloud.gateway.filter.GatewayFilterChain;import org.springframework.cloud.gateway.filter.GlobalFilter;import org.springframework.cloud.gateway.filter.NettyWriteResponseFilter;import org.springframework.core.Ordered;import org.springframework.http.HttpHeaders;import org.springframework.web.server.ServerWebExchange;import reactor.core.publisher.Mono;import java.util.ArrayList;&#x2F;** * 跨域请求头重复处理过滤器 * * @author liaoyuxing * @date 2021-5-20 *&#x2F;public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;    @Override    public int getOrder() &#123;        &#x2F;&#x2F; 指定此过滤器位于NettyWriteResponseFilter之后        &#x2F;&#x2F; 即待处理完响应体后接着处理响应头        return NettyWriteResponseFilter.WRITE_RESPONSE_FILTER_ORDER + 1;    &#125;    @Override    @SuppressWarnings(&quot;serial&quot;)    public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) &#123;        return chain.filter(exchange).then(Mono.defer(() -&gt; &#123;            exchange.getResponse().getHeaders().entrySet().stream()                    .filter(kv -&gt; (kv.getValue() !&#x3D; null &amp;&amp; kv.getValue().size() &gt; 1))                    .filter(kv -&gt; (kv.getKey().equals(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)                            || kv.getKey().equals(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS)))                    .forEach(kv -&gt;                    &#123;                        kv.setValue(new ArrayList&lt;String&gt;() &#123;&#123;                            add(kv.getValue().get(0));                        &#125;&#125;);                    &#125;);            return chain.filter(exchange);        &#125;));    &#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 乱七八糟 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> cloud gateway </tag>
-            
-            <tag> 跨域 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>使用Maven Profile和nacos namespace+group实现环境隔离</title>
       <link href="/2021/08/02/shi-yong-maven-profile-he-nacos-namespace-group-shi-xian-huan-jing-ge-chi/"/>
       <url>/2021/08/02/shi-yong-maven-profile-he-nacos-namespace-group-shi-xian-huan-jing-ge-chi/</url>
@@ -50,6 +23,33 @@
             <tag> Nacos </tag>
             
             <tag> Maven </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>spring cloud gateway解决跨域问题</title>
+      <link href="/2021/08/02/spring-cloud-gateway-jie-jue-qian-duan-kua-yu-wen-ti/"/>
+      <url>/2021/08/02/spring-cloud-gateway-jie-jue-qian-duan-kua-yu-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前后端分离普遍都会遇到跨域问题，项目内用到了网关模块，所以我们可以在网关中解决。</p><h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>增加以下两个类既可</p><pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.him.gateway.config;import com.him.gateway.filter.CorsResponseHeaderFilter;import org.springframework.context.annotation.Bean;import org.springframework.context.annotation.Configuration;import org.springframework.web.cors.CorsConfiguration;import org.springframework.web.cors.reactive.CorsWebFilter;import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;&#x2F;** * 配置跨域问题 * * @author liaoyuxing * @date 2021-5-20 *&#x2F;@Configurationpublic class CorsConfig &#123;    @Bean    public CorsResponseHeaderFilter corsResponseHeaderFilter() &#123;        return new CorsResponseHeaderFilter();    &#125;    @Bean    public CorsWebFilter corsWebFilter() &#123;        UrlBasedCorsConfigurationSource source &#x3D; new UrlBasedCorsConfigurationSource();        CorsConfiguration corsConfiguration &#x3D; new CorsConfiguration();        corsConfiguration.addAllowedHeader(&quot;*&quot;);        corsConfiguration.addAllowedMethod(&quot;*&quot;);        corsConfiguration.addAllowedOrigin(&quot;*&quot;);        corsConfiguration.setAllowCredentials(true);        corsConfiguration.setMaxAge(600L);        source.registerCorsConfiguration(&quot;&#x2F;**&quot;, corsConfiguration);        return new CorsWebFilter(source);    &#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.him.gateway.filter;import org.springframework.cloud.gateway.filter.GatewayFilterChain;import org.springframework.cloud.gateway.filter.GlobalFilter;import org.springframework.cloud.gateway.filter.NettyWriteResponseFilter;import org.springframework.core.Ordered;import org.springframework.http.HttpHeaders;import org.springframework.web.server.ServerWebExchange;import reactor.core.publisher.Mono;import java.util.ArrayList;&#x2F;** * 跨域请求头重复处理过滤器 * * @author liaoyuxing * @date 2021-5-20 *&#x2F;public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;    @Override    public int getOrder() &#123;        &#x2F;&#x2F; 指定此过滤器位于NettyWriteResponseFilter之后        &#x2F;&#x2F; 即待处理完响应体后接着处理响应头        return NettyWriteResponseFilter.WRITE_RESPONSE_FILTER_ORDER + 1;    &#125;    @Override    @SuppressWarnings(&quot;serial&quot;)    public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) &#123;        return chain.filter(exchange).then(Mono.defer(() -&gt; &#123;            exchange.getResponse().getHeaders().entrySet().stream()                    .filter(kv -&gt; (kv.getValue() !&#x3D; null &amp;&amp; kv.getValue().size() &gt; 1))                    .filter(kv -&gt; (kv.getKey().equals(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)                            || kv.getKey().equals(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS)))                    .forEach(kv -&gt;                    &#123;                        kv.setValue(new ArrayList&lt;String&gt;() &#123;&#123;                            add(kv.getValue().get(0));                        &#125;&#125;);                    &#125;);            return chain.filter(exchange);        &#125;));    &#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 乱七八糟 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> cloud gateway </tag>
+            
+            <tag> 跨域 </tag>
             
         </tags>
       
