@@ -542,13 +542,17 @@ deploy:
 <p>如果你不想安装新软件，也可以试试印象笔记推出的在线编辑模式<br>他会将你的笔记存在本地，也可以一键同步到印象笔记<br>地址：<a target="_blank" rel="noopener" href="https://maxiang.io/">马克飞象</a></p>
 <h2 id="使用图床"><a href="#使用图床" class="headerlink" title="使用图床"></a>使用图床</h2><p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_48683050/article/details/108433174">Typora+PicGo-Core实现图片自动上传图床详细说明</a></p>
 <h2 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h2><p>我们以上工作都部署完成了，就可以愉快的写文章了</p>
+<p>正常来讲，教程到这里就应该结束了</p>
 <p>但是，按照上面的教程，我们发布一遍文章的顺序是这样的：</p>
 <ol>
 <li>使用Typora来编写文章</li>
+<li>删除\hexo\source\_posts文件夹下的内容</li>
 <li>将编写之后的md文件复制到\hexo\source\_posts文件夹下</li>
 <li>打开cmd窗口，定位到hexo下</li>
-<li>执行hexo deploy 上传网站</li>
+<li>执行hexo deploy 命令上传文章</li>
 </ol>
+<p>对于这么机械化的操作流程，作为一个脚本重度用户，我肯定是要写脚本的</p>
+<p>化的流程肯定是要使用脚本的</p>
 
                 
             </div>
