@@ -325,12 +325,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Markdown/">
-                                <span class="chip bg-color">Markdown</span>
-                            </a>
-                        
                             <a href="/tags/%E5%8D%9A%E5%AE%A2/">
                                 <span class="chip bg-color">博客</span>
+                            </a>
+                        
+                            <a href="/tags/Markdown/">
+                                <span class="chip bg-color">Markdown</span>
                             </a>
                         
                     </div>
@@ -363,7 +363,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    2.9k
                 </div>
                 
 
@@ -504,25 +504,29 @@ deploy:
 <pre class="line-numbers language-none"><code class="language-none">hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>打开 <a target="_blank" rel="noopener" href="http://localhost:4000/admin/">http://localhost:4000/admin/</a> 就可以访问到hexo-admin管理页面了</p>
 <p><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627011252805.png" alt="Alt text"><br>hexo-admin的功能很多，你可以通过后台界面发布文章，修改一些设置项，还可以执行脚本等等，这里不做过多介绍，总之它可以帮助我们更好的管理博客网站</p>
-<h2 id="部署到GitHub-Pages"><a href="#部署到GitHub-Pages" class="headerlink" title="部署到GitHub Pages"></a>部署到GitHub Pages</h2><p>网站已经搭建好了，现在最重要的就是让所有人可以访问你的博客，我们利用GitHub提供的免费Pages服务来实现这一点</p>
-<p>我这里假设你已经注册好了GitHub的账号，并且你可以正常访问GitHub的网址<br>首先，创建一个项目<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012207600.png" alt="Alt text"><br>这里起名时要注意一点，GitHub Pages提供路径两种方式</p>
+<h1 id="部署到GitHub-Pages"><a href="#部署到GitHub-Pages" class="headerlink" title="部署到GitHub Pages"></a>部署到GitHub Pages</h1><p>​        网站已经搭建好了，现在最重要的就是让所有人可以访问你的博客，我们利用GitHub提供的免费Pages服务来实现这一点</p>
+<h2 id="创建github仓库"><a href="#创建github仓库" class="headerlink" title="创建github仓库"></a>创建github仓库</h2><p>我这里假设你已经注册好了GitHub的账号，并且你可以正常访问GitHub的网址<br>首先，创建一个项目<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012207600.png" alt="Alt text"><br>这里起名时要注意一点，GitHub Pages提供路径两种方式</p>
 <ol>
 <li>username.github.io</li>
 <li>username.github.io/projectname</li>
 </ol>
 <p>第一种是个人主页，第二种是项目主页<br>每个人只能有一个个人主页，可以有多个项目主页<br>如果你希望使用搭建个人主页（推荐），起名时需要使用： 你的用户名.github.io 这种格式，如下图所示<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012261870.png" alt="Alt text"></p>
-<p>创建完成后复制你的GitHub地址<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012958795.png" alt="Alt text"></p>
+<h2 id="开启Pages服务"><a href="#开启Pages服务" class="headerlink" title="开启Pages服务"></a>开启Pages服务</h2><p>创建完成后复制你的GitHub地址<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012958795.png" alt="Alt text"></p>
 <p>打开hexo项目根目录下的文件 _config.yml 配置你的git信息</p>
 <pre class="line-numbers language-none"><code class="language-none">deploy:
   type: &#39;git&#39;
   repository: &#39;https:&#x2F;&#x2F;github.com&#x2F;witleo&#x2F;witleo.github.io.git&#39;
   branch: master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>到GitHub上开启你的Pages服务，设置 - Pages ，路径选择root，然后保存</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627541610280.png" alt="Alt text"><br>我这里的设置使用了自己的域名，如果你有自己的域名，也可以在Custom domain中添加</p>
-<p>设置好了之后，回到你的hexo项目目录，执行命令</p>
+<p>配置好了之后，回到你的hexo项目目录，执行命令</p>
 <pre class="line-numbers language-none"><code class="language-none">hexo deploy <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>hexo deploy 命令会将public目录的文件强制推送到github上，直接访问我们在Pages显示的地址就可以访问博客了</p>
-<h2 id="编写博文"><a href="#编写博文" class="headerlink" title="编写博文"></a>编写博文</h2><h3 id="使用Markdown编写博文"><a href="#使用Markdown编写博文" class="headerlink" title="使用Markdown编写博文"></a>使用Markdown编写博文</h3><p>首先，我们编写博客的文章需要使用markdown 格式，什么是markdown ？</p>
+
+<p>hexo deploy 命令会将public目录的文件强制推送到github上，现在到你的github上就能看到编译完成的网站代码了</p>
+<p>然后到GitHub上开启你的Pages服务</p>
+<p>点击 设置 - Pages ，路径选择root，然后保存</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627541610280.png" alt="Alt text"></p>
+<p>我们稍作等待，直接访问我们在Pages显示的地址就可以访问博客了</p>
+<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>我这里的设置使用了自己的域名，如果你有自己的域名，也可以在Custom domain中添加</p>
+<h1 id="编写博文"><a href="#编写博文" class="headerlink" title="编写博文"></a>编写博文</h1><h2 id="使用Markdown格式编写博文"><a href="#使用Markdown格式编写博文" class="headerlink" title="使用Markdown格式编写博文"></a>使用Markdown格式编写博文</h2><p>首先，我们编写博客的文章需要使用markdown 格式，什么是markdown ？</p>
 <blockquote>
 <p>Markdown是一种轻量级标记语言，创始人为约翰·格鲁伯（英语：John Gruber）。 它允许人们使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML（或者HTML）文档。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性</p>
 </blockquote>
@@ -536,7 +540,15 @@ deploy:
 </blockquote>
 <p>关于Typora的主要特点都在<a target="_blank" rel="noopener" href="https://sspai.com/post/54912/">这里</a>，我就不再赘述了</p>
 <p>如果你不想安装新软件，也可以试试印象笔记推出的在线编辑模式<br>他会将你的笔记存在本地，也可以一键同步到印象笔记<br>地址：<a target="_blank" rel="noopener" href="https://maxiang.io/">马克飞象</a></p>
-<h3 id="使用图床"><a href="#使用图床" class="headerlink" title="使用图床"></a>使用图床</h3><p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_48683050/article/details/108433174">Typora+PicGo-Core实现图片自动上传图床详细说明</a></p>
+<h2 id="使用图床"><a href="#使用图床" class="headerlink" title="使用图床"></a>使用图床</h2><p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_48683050/article/details/108433174">Typora+PicGo-Core实现图片自动上传图床详细说明</a></p>
+<h2 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h2><p>我们以上工作都部署完成了，就可以愉快的写文章了</p>
+<p>但是，按照上面的教程，我们发布一遍文章的顺序是这样的：</p>
+<ol>
+<li>使用Typora来编写文章</li>
+<li>将编写之后的md文件复制到\hexo\source\_posts文件夹下</li>
+<li>打开cmd窗口，定位到hexo下</li>
+<li>执行hexo deploy 上传网站</li>
+</ol>
 
                 
             </div>
@@ -601,12 +613,12 @@ deploy:
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Markdown/">
-                                    <span class="chip bg-color">Markdown</span>
-                                </a>
-                            
                                 <a href="/tags/%E5%8D%9A%E5%AE%A2/">
                                     <span class="chip bg-color">博客</span>
+                                </a>
+                            
+                                <a href="/tags/Markdown/">
+                                    <span class="chip bg-color">Markdown</span>
                                 </a>
                             
                         </div>
@@ -834,16 +846,16 @@ deploy:
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2021/07/20/hello-world/">
+                <a href="/2021/07/21/li-yong-hexo-kuang-jia-da-jian-zi-ji-de-ge-ren-bo-ke/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="利用hexo框架搭建自己的个人博客">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">利用hexo框架搭建自己的个人博客</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -854,25 +866,26 @@ deploy:
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-21
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Markdown/" class="post-category">
-                                    Markdown
+                            <a href="/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" class="post-category">
+                                    乱七八糟
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hexo/">
-                        <span class="chip bg-color">Hexo</span>
+                    <a href="/tags/%E5%8D%9A%E5%AE%A2/">
+                        <span class="chip bg-color">博客</span>
                     </a>
                     
                     <a href="/tags/Markdown/">
