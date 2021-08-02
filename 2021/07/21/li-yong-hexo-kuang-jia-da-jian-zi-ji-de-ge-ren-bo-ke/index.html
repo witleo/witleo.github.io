@@ -554,7 +554,8 @@ deploy:
 <p>对于这么机械化的操作流程，作为一个脚本重度用户，肯定是需要使用脚本来自动完成的</p>
 <p>首先创建一个.bat文件</p>
 <p>然后按照上面列出的步骤，实现脚本：</p>
-<pre class="line-numbers language-none"><code class="language-none">
+<pre class="line-numbers language-none"><code class="language-none">@echo off
+
 echo ---------------------1.进入到你的hexo文件夹目录下---------------------
 d:
 cd D:\work\hexo\
@@ -568,7 +569,7 @@ echo ---------------------5.上传到github---------------------
 call hexo deploy
 echo ---------------------完成---------------------
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>好了，这样我们点击执行脚本，就可以一键部署到github了</p>
 <p>正常来讲，教程到这里又该结束了</p>
