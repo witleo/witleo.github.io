@@ -363,14 +363,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.9k
+                    3.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    12 分
                 </div>
                 
 
@@ -551,8 +551,46 @@ deploy:
 <li>打开cmd窗口，定位到hexo下</li>
 <li>执行hexo deploy 命令上传文章</li>
 </ol>
-<p>对于这么机械化的操作流程，作为一个脚本重度用户，我肯定是要写脚本的</p>
-<p>化的流程肯定是要使用脚本的</p>
+<p>对于这么机械化的操作流程，作为一个脚本重度用户，肯定是需要使用脚本来自动完成的</p>
+<p>首先创建一个.bat文件</p>
+<p>然后按照上面列出的步骤，实现脚本：</p>
+<pre class="line-numbers language-none"><code class="language-none">
+echo ---------------------1.进入到你的hexo文件夹目录下---------------------
+d:
+cd D:\work\hexo\
+echo ---------------------2.清空项目的_posts文件夹---------------------
+del &#x2F;f &#x2F;s &#x2F;q D:\work\hexo\source\_posts\*.*
+echo ---------------------3.将你的md文档复制到_posts文件夹内---------------------
+copy D:\work\md文档\外部文档\*.md D:\work\hexo\source\_posts
+echo ---------------------4.清理项目---------------------
+call hexo clean
+echo ---------------------5.上传到github---------------------
+call hexo deploy
+echo ---------------------完成---------------------
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>好了，这样我们点击执行脚本，就可以一键部署到github了</p>
+<p>正常来讲，教程到这里又该结束了</p>
+<p>但是，这样还是要离开Typora编辑器。用过IDEA之类编辑器的都知道，在IDEA内部就能执行脚本，并且还能保存脚本配置</p>
+<p>那么能不能把脚本集成到Typora内呢，终于让我找到了一处可以执行脚本的地方</p>
+<p>官方文档介绍说，可以在导出时触发命令，例如:要将当前文件提交到 git 服务器，你可以在这里使用<code>git add</code>命令</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141017230.png" alt="image-20210802141017230"></p>
+<p>原文连接：<a target="_blank" rel="noopener" href="https://support.typora.io/Export/#other-formats-using-custom-commands">https://support.typora.io/Export/#other-formats-using-custom-commands</a></p>
+<p>OK，我们可以在此处加入我们的脚本</p>
+<p>点击 文件 - 偏好设置 - 导出 ，我们添加一个导出项</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141713227.png" alt="image-20210802141713227"></p>
+<p>模板选择自定义</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141846138.png" alt="image-20210802141846138"></p>
+<p>在命令行处添加我们上面写好的脚本路径</p>
+<pre class="line-numbers language-none"><code class="language-none">call D:\Typora\uploadToGihub.bat<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141946743.png" alt="image-20210802141946743"></p>
+<p>接下来我们验证一下，创建一个测试md文件，然后点击文件 - 导出 - 上传到github</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802142324124.png" alt="image-20210802142324124"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802142435890.png" alt="image-20210802142435890"></p>
 
                 
             </div>
