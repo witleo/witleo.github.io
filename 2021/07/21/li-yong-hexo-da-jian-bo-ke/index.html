@@ -397,7 +397,7 @@
 <p>什么是GitHub Pages？<br>GitHub Pages 是直接从 GitHub 存储库托管的静态网站。 但它们不仅仅是静态文件的集合。 通过利用 Jekyll 和 Liquid 等网站生成技术，开发人员可定义被处理为完整静态网站的动态模板。 每次将更改提交到与网站关联的源分支时，都会使用最新更新重新生成该更改，并自动将其发布到目标 URL。</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages官网链接</a><br>简单的说，就是把你的博客网站放在GitHub Pages上进行免费托管，让大家都能访问<br>GitHub Pages也可以换成任意一个支持Hexo的托管服务</p>
-<p>比如Gitee Pages、coding、Vercel等等<br>当然，我原本是想使用Gitee Pages的，毕竟国内的访问速度会快很多，但是…<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1626857103252.png" alt="Alt text"></p>
+<p>比如Gitee Pages、coding、Vercel等等<br>当然，我原本是想使用Gitee Pages的，毕竟国内的访问速度会快很多，但是…<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1626857103252.png" alt="Gitee Pages服务"></p>
 <p>居然是因为政策法规影响，不得已放弃</p>
 <p>你现在所浏览的博客就是利用hexo+github搭建而成的，并且完全免费，不会产生任何费用（当然，如果你想使用自己的域名，可能会产生相关费用）</p>
 <p>如果你的基础较好，或者对此类开发部署方法有所了解，也可以试试使用Vercel托管</p>
@@ -412,26 +412,26 @@
 <pre class="line-numbers language-none"><code class="language-none">hexo init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>这时刷新文件夹就可以看到整个项目的文件目录结构了，然后安装依赖</p>
 <pre class="line-numbers language-none"><code class="language-none">npm install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>继续下一步，进行构建，构建完成会生成一个public文件夹<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1626857847132.png" alt="Alt text"></p>
+<p>继续下一步，进行构建，构建完成会生成一个public文件夹<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1626857847132.png" alt="项目结构"></p>
 <p>public文件夹内就是我们生成的静态网站内容，我们在部署到github时，就是上传这部分代码<br>这里已经安装并构建完成了，我们可以启动看看效果</p>
 <pre class="line-numbers language-none"><code class="language-none">hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/1626858130233.png" alt="Alt text"><br>注：这里看到我执行的是hexo s 实际上是hexo server命令的简写，效果是一样的<br>hexo命令：</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/1626858130233.png" alt="执行hexo server"><br>注：这里看到我执行的是hexo s 实际上是hexo server命令的简写，效果是一样的<br>hexo命令：</p>
 <ul>
 <li>hexo clean ##清理</li>
 <li>hexo g ##构建、编译</li>
 <li>hexo s ##启动服务</li>
-<li>hexo d ##上传至服务器<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1626858445714.png" alt="Alt text"><br>这就是博客的默认主题页面了，下一步开始进行更换主题</li>
+<li>hexo d ##上传至服务器<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1626858445714.png" alt="默认主题首页"><br>这就是博客的默认主题页面了，下一步开始进行更换主题</li>
 </ul>
-<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>我们可以看到官方默认提供的主题功能并不多，页面也比较简单，当然我们可以自己进行修改，但是官方也提供一些网友自己制作的主题，功能更加丰富，可以直接套用<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627006415456.png" alt="Alt text"></p>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>我们可以看到官方默认提供的主题功能并不多，页面也比较简单，当然我们可以自己进行修改，但是官方也提供一些网友自己制作的主题，功能更加丰富，可以直接套用<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627006415456.png" alt="官网首页-主题介绍"></p>
 <p><a target="_blank" rel="noopener" href="https://hexo.io/themes/">主题选取页面</a></p>
-<p>你可以从官方提供的主题库中选取增加喜欢的主题<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627007882969.png" alt="Alt text"></p>
+<p>你可以从官方提供的主题库中选取增加喜欢的主题<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627007882969.png" alt="主题市场页面"></p>
 <p>附上我使用的主题链接：<br><a target="_blank" rel="noopener" href="https://blinkfox.github.io/2018/09/28/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/#toc-heading-10">Hexo博客主题之hexo-theme-matery</a></p>
 <p>每个主题内会有安装调试的使用介绍，因为每个主题的设置项不同，这里不再展开复述，请按照主题内教程进行配置</p>
 <h2 id="Hexo扩展插件"><a href="#Hexo扩展插件" class="headerlink" title="Hexo扩展插件"></a>Hexo扩展插件</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote>
 <p>Hexo 有强大的插件系统，使您能轻松扩展功能而不用修改核心模块的源码。</p>
 </blockquote>
 <p>在 Hexo 中有两种形式的插件，脚本（Scripts）和插件（Packages），这里不讨论脚本（Scripts）形式，只介绍和推荐插件（Packages）形式</p>
-<p>扩展插件可以很方便的使我们的博客功能更加丰富<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627008344829.png" alt="Alt text"></p>
+<p>扩展插件可以很方便的使我们的博客功能更加丰富<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627008344829.png" alt="插件市场页面"></p>
 <p><a target="_blank" rel="noopener" href="https://hexo.io/plugins/">插件列表地址</a></p>
 <p>我们可以看到，官方给出的插件库中足足有385个插件可以使用<br>这些插件都能做什么呢？举个栗子<br>在我所使用的主题中，就应用到了以下几个插件：</p>
 <ul>
@@ -445,7 +445,7 @@
 <h3 id="安装hexo-deployer-git插件"><a href="#安装hexo-deployer-git插件" class="headerlink" title="安装hexo-deployer-git插件"></a>安装hexo-deployer-git插件</h3><blockquote>
 <p>Hexo 的Git 一键部署插件。</p>
 </blockquote>
-<p>我们在插件市场搜索deployer，可以看到官方已经提供了大部分平台的一键部署插件，我们前面选用的是github，所以我们对应的需要使用hexo-deployer-git插件<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627009687046.png" alt="Alt text"></p>
+<p>我们在插件市场搜索deployer，可以看到官方已经提供了大部分平台的一键部署插件，我们前面选用的是github，所以我们对应的需要使用hexo-deployer-git插件<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627009687046.png" alt="插件市场页面"></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git插件地址</a></p>
 <p><strong>安装</strong></p>
 <hr>
@@ -504,15 +504,15 @@ deploy:
 <p>安装完成后启动hexo</p>
 <pre class="line-numbers language-none"><code class="language-none">hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>打开 <a target="_blank" rel="noopener" href="http://localhost:4000/admin/">http://localhost:4000/admin/</a> 就可以访问到hexo-admin管理页面了</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627011252805.png" alt="Alt text"><br>hexo-admin的功能很多，你可以通过后台界面发布文章，修改一些设置项，还可以执行脚本等等，这里不做过多介绍，总之它可以帮助我们更好的管理博客网站</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627011252805.png" alt="admin管理页面"><br>hexo-admin的功能很多，你可以通过后台界面发布文章，修改一些设置项，还可以执行脚本等等，这里不做过多介绍，总之它可以帮助我们更好的管理博客网站</p>
 <h1 id="部署到GitHub-Pages"><a href="#部署到GitHub-Pages" class="headerlink" title="部署到GitHub Pages"></a>部署到GitHub Pages</h1><p>​        网站已经搭建好了，现在最重要的就是让所有人可以访问你的博客，我们利用GitHub提供的免费Pages服务来实现这一点</p>
-<h2 id="创建github仓库"><a href="#创建github仓库" class="headerlink" title="创建github仓库"></a>创建github仓库</h2><p>我这里假设你已经注册好了GitHub的账号，并且你可以正常访问GitHub的网址<br>首先，创建一个项目<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012207600.png" alt="Alt text"><br>这里起名时要注意一点，GitHub Pages提供路径两种方式</p>
+<h2 id="创建github仓库"><a href="#创建github仓库" class="headerlink" title="创建github仓库"></a>创建github仓库</h2><p>我这里假设你已经注册好了GitHub的账号，并且你可以正常访问GitHub的网址<br>首先，创建一个项目<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012207600.png" alt="创建仓库"><br>这里起名时要注意一点，GitHub Pages提供路径两种方式</p>
 <ol>
 <li>username.github.io</li>
 <li>username.github.io/projectname</li>
 </ol>
-<p>第一种是个人主页，第二种是项目主页<br>每个人只能有一个个人主页，可以有多个项目主页<br>如果你希望使用搭建个人主页（推荐），起名时需要使用： 你的用户名.github.io 这种格式，如下图所示<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012261870.png" alt="Alt text"></p>
-<h2 id="开启Pages服务"><a href="#开启Pages服务" class="headerlink" title="开启Pages服务"></a>开启Pages服务</h2><p>创建完成后复制你的GitHub地址<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012958795.png" alt="Alt text"></p>
+<p>第一种是个人主页，第二种是项目主页<br>每个人只能有一个个人主页，可以有多个项目主页<br>如果你希望使用搭建个人主页（推荐），起名时需要使用： 你的用户名.github.io 这种格式，如下图所示<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012261870.png" alt="填写仓库信息"></p>
+<h2 id="开启Pages服务"><a href="#开启Pages服务" class="headerlink" title="开启Pages服务"></a>开启Pages服务</h2><p>创建完成后复制你的GitHub地址<br><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627012958795.png" alt="复制地址"></p>
 <p>打开hexo项目根目录下的文件 _config.yml 配置你的git信息</p>
 <pre class="line-numbers language-none"><code class="language-none">deploy:
   type: &#39;git&#39;
@@ -524,7 +524,7 @@ deploy:
 <p>hexo deploy 命令会将public目录的文件强制推送到github上，现在到你的github上就能看到编译完成的网站代码了</p>
 <p>然后到GitHub上开启你的Pages服务</p>
 <p>点击 设置 - Pages ，路径选择root，然后保存</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627541610280.png" alt="Alt text"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/1627541610280.png" alt="设置Pages"></p>
 <p>我们稍作等待，直接访问我们在Pages显示的地址就可以访问博客了</p>
 <h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>我这里的设置使用了自己的域名，如果你有自己的域名，也可以在Custom domain中添加</p>
 <h1 id="编写博文"><a href="#编写博文" class="headerlink" title="编写博文"></a>编写博文</h1><h2 id="使用Markdown格式编写博文"><a href="#使用Markdown格式编写博文" class="headerlink" title="使用Markdown格式编写博文"></a>使用Markdown格式编写博文</h2><p>首先，我们编写博客的文章需要使用markdown 格式，什么是markdown ？</p>
@@ -586,28 +586,28 @@ echo ---------------------完成---------------------
 <p>但是，这样还是要离开Typora编辑器。用过IDEA之类编辑器的都知道，在IDEA内部就能执行脚本，并且还能保存脚本配置</p>
 <p>那么能不能把脚本集成到Typora内呢，我翻遍了Typora的设置项，终于让我找到了一处可以执行脚本的地方</p>
 <p>官方文档介绍说，可以在导出时触发命令，例如:要将当前文件提交到 git 服务器，你可以在这里使用<code>git add</code>命令</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141017230.png" alt="image-20210802141017230"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141017230.png" alt="官网介绍文档"></p>
 <p>原文连接：<a target="_blank" rel="noopener" href="https://support.typora.io/Export/#other-formats-using-custom-commands">https://support.typora.io/Export/#other-formats-using-custom-commands</a></p>
 <p>OK，我们可以在此处加入我们的脚本</p>
 <p>点击 文件 - 偏好设置 - 导出 ，我们添加一个导出项</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141713227.png" alt="image-20210802141713227"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141713227.png" alt="添加导出项"></p>
 <p>模板选择自定义</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141846138.png" alt="image-20210802141846138"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141846138.png" alt="新增模板"></p>
 <p>在命令行处添加我们上面写好的脚本路径</p>
 <pre class="line-numbers language-none"><code class="language-none">call D:\Typora\uploadToGihub.bat<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141946743.png" alt="image-20210802141946743"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802141946743.png" alt="添加脚本路径"></p>
 <p>接下来我们验证一下，创建一个测试md文件，然后点击文件 - 导出 - 上传到github</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802142324124.png" alt="image-20210802142324124"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802142324124.png" alt="选择上传到github"></p>
 <p>在Typora顶部会提示正在导出，此时正在执行脚本</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802142508430.png" alt="image-20210802142508430"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802142508430.png" alt="正在导出提示"></p>
 <p>待脚本执行完成后，Typora顶部会进行提示，当失败时会弹出窗口显示log日志</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802150030806.png" alt="image-20210802150030806"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802150030806.png" alt="脚本执行完成提示"></p>
 <p>可以看到这里提示我上传成功了,日志中都是强制推送覆盖的警告，我们不用管</p>
 <p>稍待片刻，访问博客网站进行验证</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802142435890.png" alt="image-20210802142435890"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20210802142435890.png" alt="上传成功"></p>
 <p>OK，已经可以看到我们刚才创建的文件已经上传成功了</p>
 <p>现在，我们仅在Typora内就可以完成编写文章和上传部署的所有操作了</p>
 <p>一键部署演示：</p>

@@ -6,7 +6,7 @@
   <link href="http://blog.witleo.com/atom.xml" rel="self"/>
   
   <link href="http://blog.witleo.com/"/>
-  <updated>2021-08-03T01:11:41.587Z</updated>
+  <updated>2021-08-03T05:19:28.285Z</updated>
   <id>http://blog.witleo.com/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="http://blog.witleo.com/2021/08/02/spring-cloud-gateway-jie-jue-kua-yu-wen-ti/"/>
     <id>http://blog.witleo.com/2021/08/02/spring-cloud-gateway-jie-jue-kua-yu-wen-ti/</id>
     <published>2021-08-02T02:00:00.000Z</published>
-    <updated>2021-08-03T01:11:41.587Z</updated>
+    <updated>2021-08-03T05:19:28.285Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;前后端分离普遍都会遇到跨域问题，项目内用到了网关模块，所以我们可以在网关中解决。&lt;/p&gt;
-&lt;h1 id=&quot;解决&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;前后端分离开发时，我们经常会遇到跨域问题&lt;/p&gt;
+&lt;h2 id=&quot;什么是跨域？&quot;&gt;&lt;a href=&quot;#什么是跨域？&quot;</summary>
         
       
     
@@ -132,7 +132,7 @@
     <link href="http://blog.witleo.com/2021/07/21/li-yong-hexo-da-jian-bo-ke/"/>
     <id>http://blog.witleo.com/2021/07/21/li-yong-hexo-da-jian-bo-ke/</id>
     <published>2021-07-21T08:25:00.000Z</published>
-    <updated>2021-08-03T02:52:12.892Z</updated>
+    <updated>2021-08-03T03:00:55.723Z</updated>
     
     
       
