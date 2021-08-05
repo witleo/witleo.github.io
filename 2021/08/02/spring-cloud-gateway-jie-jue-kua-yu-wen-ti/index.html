@@ -410,26 +410,10 @@
 <li><p>利用 iframe、script标签没有跨域限制的漏洞，或者使用websocket请求，规避掉跨域问题</p>
 </li>
 </ol>
+<p>这里我只推荐这以下两种方式跨域，其它的跨域方式都还有很多但都不推荐<br>| 开发环境 | 生产环境 |<br>| :——: | :——: |<br>|   cors   | cors     |<br>|  proxy   | nginx    |</p>
 <h2 id="前端解决方式"><a href="#前端解决方式" class="headerlink" title="前端解决方式"></a>前端解决方式</h2><blockquote>
 <p>在 <code>dev</code> 开发模式下可以下使用 webpack 的 <code>proxy</code> 使用也是很方便，参照 <a target="_blank" rel="noopener" href="https://www.webpackjs.com/configuration/dev-server/#devserver-proxy">文档</a> 就会使用了。但这种方法在生产环境是不能使用的。在生产环境中需要使用 <code>nginx</code> 进行反向代理。不管是 <code>proxy</code> 和 <code>nginx</code> 的原理都是一样的，通过搭建一个中转服务器来转发请求规避跨域的问题。</p>
 </blockquote>
-<table>
-<thead>
-<tr>
-<th align="center">开发环境</th>
-<th align="center">生产环境</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">cors</td>
-<td align="center">cors</td>
-</tr>
-<tr>
-<td align="center">proxy</td>
-<td align="center">nginx</td>
-</tr>
-</tbody></table>
-<p>这里我只推荐这两种方式跨域，其它的跨域方式都还有很多但都不推荐</p>
 <h2 id="后端解决方式"><a href="#后端解决方式" class="headerlink" title="后端解决方式"></a>后端解决方式</h2><h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>CORS支持所有类型的HTTP请求，是跨域HTTP请求的根本解决方案</p>
 <blockquote>
 <p> <code>cors</code> 全称为 Cross Origin Resource Sharing（跨域资源共享）。这种方案对于前端来说没有什么工作量，和正常发送请求写法上没有任何区别，工作量基本都在后端这里。每一次请求，浏览器必须先以 <code>OPTIONS</code> 请求方式发送一个预请求（也不是所有请求都会发送 options，展开介绍 <a target="_blank" rel="noopener" href="https://panjiachen.github.io/awesome-bookmarks/blog/cs.html#cors">点我</a>），通过预检请求从而获知服务器端对跨源请求支持的 <code>HTTP</code> 方法。在确认服务器允许该跨源请求的情况下，再以实际的 <code>HTTP</code> 请求方法发送那个真正的请求。推荐的原因是：只要第一次配好了，之后不管有多少接口和项目复用就可以了，一劳永逸的解决了跨域问题，而且不管是开发环境还是正式环境都能方便的使用。</p>
@@ -770,17 +754,18 @@ public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/08/02/li-yong-vuex-mixin-you-hua-shu-ju-zi-dian/">
+                <a href="/2021/08/02/spring-cloud-gateway-jie-jue-kua-yu-wen-ti/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="利用vuex+mixin优化数据字典的存取方案">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="spring cloud gateway解决跨域问题">
                         
-                        <span class="card-title">利用vuex+mixin优化数据字典的存取方案</span>
+                        <span class="card-title">spring cloud gateway解决跨域问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -790,9 +775,9 @@ public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -805,15 +790,16 @@ public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
+                    <a href="/tags/cloud-gateway/">
+                        <span class="chip bg-color">cloud gateway</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/">
-                        <span class="chip bg-color">数据字典</span>
+                    <a href="/tags/%E8%B7%A8%E5%9F%9F/">
+                        <span class="chip bg-color">跨域</span>
                     </a>
                     
                 </div>
