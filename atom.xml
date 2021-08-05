@@ -49,14 +49,14 @@
     <link href="http://blog.witleo.com/2021/08/02/shi-yong-maven-he-nacos-shi-xian-huan-jing-ge-chi/"/>
     <id>http://blog.witleo.com/2021/08/02/shi-yong-maven-he-nacos-shi-xian-huan-jing-ge-chi/</id>
     <published>2021-08-02T02:00:00.000Z</published>
-    <updated>2021-08-03T01:11:45.739Z</updated>
+    <updated>2021-08-05T03:00:16.487Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;遇到的问题&quot;&gt;&lt;a href=&quot;#遇到的问题&quot; class=&quot;headerlink&quot; title=&quot;遇到的问题&quot;&gt;&lt;/a&gt;遇到的问题&lt;/h1&gt;&lt;p&gt; 1.在开发过程中需要修改服务的nacos地址（或其他公共配置）时，需要每个微服务配置文件都改一遍&lt;br&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;遇到的问题&quot;&gt;&lt;a href=&quot;#遇到的问题&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -132,7 +132,7 @@
     <link href="http://blog.witleo.com/2021/07/21/li-yong-hexo-da-jian-bo-ke/"/>
     <id>http://blog.witleo.com/2021/07/21/li-yong-hexo-da-jian-bo-ke/</id>
     <published>2021-07-21T08:25:00.000Z</published>
-    <updated>2021-08-03T06:05:46.525Z</updated>
+    <updated>2021-08-03T06:23:28.085Z</updated>
     
     
       

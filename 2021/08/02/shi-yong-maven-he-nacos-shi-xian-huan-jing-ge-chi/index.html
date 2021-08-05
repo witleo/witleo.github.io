@@ -363,14 +363,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    7 分
                 </div>
                 
 
@@ -388,7 +388,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p> 1.在开发过程中需要修改服务的nacos地址（或其他公共配置）时，需要每个微服务配置文件都改一遍<br> 2.几乎nacos每个微服务的配置文件中都含有相同的配置（例如数据库配置），当需要修改数据库连接地址时每个nacos配置文件都改一遍<br> 3.在不同的项目中会存在相同的模块名(global-auth),会有nacos的Data ID重复的情况<br> 4.对应不同的环境应有多套配置文件（如测试环境、开发环境、linux环境和windows环境等等）<br> 5.在不改动代码的情况下快速发布、部署测试环境的代码</p>
+                <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><ol>
+<li>在开发过程中需要修改服务的nacos地址（或其他公共配置）时，需要每个微服务配置文件都改一遍</li>
+<li>几乎nacos每个微服务的配置文件中都含有相同的配置（例如数据库配置），当需要修改数据库连接地址时每个nacos配置文件都改一遍</li>
+<li>在不同的项目中会存在相同的模块名(global-auth),会有nacos的Data ID重复的情况</li>
+<li>对应不同的环境应有多套配置文件（如测试环境、开发环境、linux环境和windows环境等等）</li>
+<li>如何在不改动代码的情况下快速发布、部署多个环境下的代码</li>
+</ol>
 <h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><h2 id="使用Nacos-Namespace进行多环境配置"><a href="#使用Nacos-Namespace进行多环境配置" class="headerlink" title="使用Nacos Namespace进行多环境配置"></a>使用Nacos Namespace进行多环境配置</h2><p>首先，nacos为我们提供了多种环境隔离的方案，可以根据项目规模、参与开发人数和业务规划等多个角度可以确定我们的最优方案</p>
 <blockquote>
 <p>第一种：通过Data ID与profile实现。</p>
@@ -410,8 +416,8 @@ shared-configs[1]:
   group: $&#123;nacos.group&#125;
   refresh: true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="使用Maven-Profile实现项目内的环境统一"><a href="#使用Maven-Profile实现项目内的环境统一" class="headerlink" title="使用Maven Profile实现项目内的环境统一"></a>使用Maven Profile实现项目内的环境统一</h2><p>在开发过程中，我们的项目会存在不同的运行环境，比如开发环境、测试环境、生产环境，而我们的项目在不同的环境中，有的配置可能会不一样，比如数据源配置、日志文件配置、以及一些软件运行过程中的基本配置，那每次我们将软件部署到不同的环境时，都需要修改相应的配置文件，这样来回修改，很容易出错，而且浪费劳动力。</p>
-<p>pom文件配置如下：</p>
+<h2 id="使用Maven-Profile实现项目内的环境统一"><a href="#使用Maven-Profile实现项目内的环境统一" class="headerlink" title="使用Maven Profile实现项目内的环境统一"></a>使用Maven Profile实现项目内的环境统一</h2><p>​        在开发过程中，我们的项目会存在不同的运行环境，比如开发环境、测试环境、生产环境，而我们的项目在不同的环境中，有的配置可能会不一样，比如数据源配置、日志文件配置、以及一些软件运行过程中的基本配置，那每次我们将软件部署到不同的环境时，都需要修改相应的配置文件，这样来回修改，很容易出错，而且浪费劳动力。</p>
+<p>​        我们使用Maven Profile来让微服务的配置项变成一个动态参数，在pom文件中进行统一维护，可以让多个微服务的配置进行同步修改。首先，添加的你的多环境配置参数，修改项目父pom文件，pom文件新增配置如下：</p>
 <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
@@ -453,7 +459,7 @@ shared-configs[1]:
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profiles</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>bootstrap.yml文件的配置如下：</p>
+<p>bootstrap.yml文件的配置修改如下：</p>
 <pre class="line-numbers language-none"><code class="language-none"># Spring
 spring:
   application:
@@ -472,11 +478,27 @@ spring:
 <p>其中pom.xml文件中的activation标签代表当前启用的环境，打包时会默认打包activation所标记的环境<br>使用maven打包时可以通过 -P 参数来指定环境<br>例如：</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">mvn clean package -P test<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>以上打包命令表示使用测试环境进行打包，这样就可以实现使用打包命令而不改动代码对多个环境进行发布</p>
-<p>或者你还可以通过mvn -Dxxx来指定启动参数<br>例如：</p>
+<p>当你想打包的环境信息不在pom文件中时，你还可以通过mvn -Dxxx来指定maven的打包参数<br>例如：</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">mvn -Dnacos.server-addr&#x3D;127.0.0.1:8848 -Dnacos.namespace&#x3D;prod  clean package<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-
-
+<p>总结：</p>
+<p>好了，刚刚我们列出了三种打包方式</p>
+<ol>
+<li><p>mvn clean package</p>
+</li>
+<li><p>mvn clean package -P test</p>
+</li>
+<li><p>mvn -Dnacos.server-addr=127.0.0.1:8848 -Dnacos.namespace=prod  clean package</p>
+</li>
+</ol>
+<p>第一种会使用activation标签所标记位置的参数打包（上面的例子中是dev环境）</p>
+<p>第二种会使用-P 参数指定的的环境名进行打包</p>
+<p>第三种会直接使用指定的配置进行打包</p>
+<p>注：当使用-P 指定环境后，activation标签不再生效</p>
+<p>当使用-D 指定具体参数时</p>
+<p>对于已指定参数，前两种方法也不再生效</p>
+<p>对于未指定的参数，优先级规则依然是 -P &gt;activation标签</p>
+<p>优先级：3&gt;2&gt;1</p>
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>使用Nacos Namespace配置解决了问题3和4<br>shared-configs配置解决了问题2<br>Maven Profile解决了问题1和5</p>
 <p>global-auth服务的完整配置：</p>
 <pre class="line-numbers language-none"><code class="language-none"># Spring
