@@ -6,7 +6,7 @@
   <link href="http://blog.witleo.com/atom.xml" rel="self"/>
   
   <link href="http://blog.witleo.com/"/>
-  <updated>2021-08-03T05:19:28.285Z</updated>
+  <updated>2021-08-03T01:11:33.515Z</updated>
   <id>http://blog.witleo.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用vuex+mixin优化数据字典的存取方案</title>
+    <link href="http://blog.witleo.com/2021/08/02/li-yong-vuex-mixin-you-hua-shu-ju-zi-dian/"/>
+    <id>http://blog.witleo.com/2021/08/02/li-yong-vuex-mixin-you-hua-shu-ju-zi-dian/</id>
+    <published>2021-08-02T02:00:00.000Z</published>
+    <updated>2021-08-03T01:11:33.515Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1、问题描述&quot;&gt;&lt;a href=&quot;#1、问题描述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="乱七八糟" scheme="http://blog.witleo.com/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/"/>
+    
+    
+    <category term="vue" scheme="http://blog.witleo.com/tags/vue/"/>
+    
+    <category term="数据字典" scheme="http://blog.witleo.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>spring cloud gateway解决跨域问题</title>
@@ -68,33 +95,6 @@
     <category term="Nacos" scheme="http://blog.witleo.com/tags/Nacos/"/>
     
     <category term="Maven" scheme="http://blog.witleo.com/tags/Maven/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用vuex+mixin优化数据字典的存取方案</title>
-    <link href="http://blog.witleo.com/2021/08/02/li-yong-vuex-mixin-you-hua-shu-ju-zi-dian/"/>
-    <id>http://blog.witleo.com/2021/08/02/li-yong-vuex-mixin-you-hua-shu-ju-zi-dian/</id>
-    <published>2021-08-02T02:00:00.000Z</published>
-    <updated>2021-08-03T01:11:33.515Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;1、问题描述&quot;&gt;&lt;a href=&quot;#1、问题描述&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="乱七八糟" scheme="http://blog.witleo.com/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/"/>
-    
-    
-    <category term="vue" scheme="http://blog.witleo.com/tags/vue/"/>
-    
-    <category term="数据字典" scheme="http://blog.witleo.com/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/"/>
     
   </entry>
   
