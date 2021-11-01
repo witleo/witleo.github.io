@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="spring cloud gateway解决跨域问题, null">
+    <meta name="keywords" content="">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>spring cloud gateway解决跨域问题 | null</title>
+    <title></title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -204,12 +204,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">spring cloud gateway解决跨域问题</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -323,29 +323,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/cloud-gateway/">
-                                <span class="chip bg-color">cloud gateway</span>
-                            </a>
-                        
-                            <a href="/tags/%E8%B7%A8%E5%9F%9F/">
-                                <span class="chip bg-color">跨域</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" class="post-category">
-                                乱七八糟
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -354,7 +337,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-08-02
+                    2021-11-01
                 </div>
                 
 
@@ -363,14 +346,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    0
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    1 分
                 </div>
                 
 
@@ -388,134 +371,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前后端分离开发时，我们经常会遇到跨域问题</p>
-<h2 id="什么是跨域？"><a href="#什么是跨域？" class="headerlink" title="什么是跨域？"></a>什么是跨域？</h2><ol>
-<li><p>什么是同源策略及其限制内容？</p>
-<p>同源策略是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。所谓同源是指”协议+域名+端口”三者相同，即便两个不同的域名指向同一个ip地址，也非同源。</p>
-</li>
-</ol>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/2019-01-26-01.png" alt="地址结构"></p>
-<ol start="2">
-<li><p>请求跨域了，那么请求到底发出去没有？</p>
-<p>跨域并不是请求发不出去，请求能发出去，服务端能收到请求并正常返回结果，只是结果被浏览器拦截了。你可能会疑问明明通过表单的方式可以发起跨域请求，为什么 Ajax 就不会?因为归根结底，跨域是为了阻止用户读取到另一个域名下的内容，Ajax 可以获取响应，浏览器认为这不安全，所以拦截了响应。但是表单并不会获取新的内容，所以可以发起跨域请求。同时也说明了跨域并不能完全阻止 CSRF，因为请求毕竟是发出去了。</p>
-</li>
-</ol>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>跨域问题如何解决？</p>
-<p>绝大多数解决方式无非是以下三类</p>
-<ol>
-<li><p>服务器设置为允许跨域访问，后端实现 CORS</p>
-</li>
-<li><p>使用中间件代理、过滤器或者nginx反向代理等，通过同源策略对服务器不加限制</p>
-</li>
-<li><p>利用 iframe、script标签没有跨域限制的漏洞，或者使用websocket请求，规避掉跨域问题</p>
-</li>
-</ol>
-<p>这里我只推荐这以下两种方式跨域，其它的跨域方式都还有很多但都不推荐<br>| 开发环境 | 生产环境 |<br>| :——: | :——: |<br>|   cors   | cors     |<br>|  proxy   | nginx    |</p>
-<h2 id="前端解决方式"><a href="#前端解决方式" class="headerlink" title="前端解决方式"></a>前端解决方式</h2><blockquote>
-<p>在 <code>dev</code> 开发模式下可以下使用 webpack 的 <code>proxy</code> 使用也是很方便，参照 <a target="_blank" rel="noopener" href="https://www.webpackjs.com/configuration/dev-server/#devserver-proxy">文档</a> 就会使用了。但这种方法在生产环境是不能使用的。在生产环境中需要使用 <code>nginx</code> 进行反向代理。不管是 <code>proxy</code> 和 <code>nginx</code> 的原理都是一样的，通过搭建一个中转服务器来转发请求规避跨域的问题。</p>
-</blockquote>
-<h2 id="后端解决方式"><a href="#后端解决方式" class="headerlink" title="后端解决方式"></a>后端解决方式</h2><h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>CORS支持所有类型的HTTP请求，是跨域HTTP请求的根本解决方案</p>
-<blockquote>
-<p> <code>cors</code> 全称为 Cross Origin Resource Sharing（跨域资源共享）。这种方案对于前端来说没有什么工作量，和正常发送请求写法上没有任何区别，工作量基本都在后端这里。每一次请求，浏览器必须先以 <code>OPTIONS</code> 请求方式发送一个预请求（也不是所有请求都会发送 options，展开介绍 <a target="_blank" rel="noopener" href="https://panjiachen.github.io/awesome-bookmarks/blog/cs.html#cors">点我</a>），通过预检请求从而获知服务器端对跨源请求支持的 <code>HTTP</code> 方法。在确认服务器允许该跨源请求的情况下，再以实际的 <code>HTTP</code> 请求方法发送那个真正的请求。推荐的原因是：只要第一次配好了，之后不管有多少接口和项目复用就可以了，一劳永逸的解决了跨域问题，而且不管是开发环境还是正式环境都能方便的使用。</p>
-</blockquote>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/CORS_principle.png" alt="CORS"></p>
-<h3 id="在spring-cloud-gateway项目中解决跨域"><a href="#在spring-cloud-gateway项目中解决跨域" class="headerlink" title="在spring cloud gateway项目中解决跨域"></a>在spring cloud gateway项目中解决跨域</h3><p>增加以下两个类既可</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.him.gateway.config;
-
-import com.him.gateway.filter.CorsResponseHeaderFilter;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.reactive.CorsWebFilter;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-
-&#x2F;**
- * 配置跨域问题
- *
- * @author liaoyuxing
- * @date 2021-5-20
- *&#x2F;
-@Configuration
-public class CorsConfig &#123;
-
-    @Bean
-    public CorsResponseHeaderFilter corsResponseHeaderFilter() &#123;
-        return new CorsResponseHeaderFilter();
-    &#125;
-
-    @Bean
-    public CorsWebFilter corsWebFilter() &#123;
-        UrlBasedCorsConfigurationSource source &#x3D; new UrlBasedCorsConfigurationSource();
-        CorsConfiguration corsConfiguration &#x3D; new CorsConfiguration();
-
-        corsConfiguration.addAllowedHeader(&quot;*&quot;);
-        corsConfiguration.addAllowedMethod(&quot;*&quot;);
-        corsConfiguration.addAllowedOrigin(&quot;*&quot;);
-        corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setMaxAge(600L);
-
-        source.registerCorsConfiguration(&quot;&#x2F;**&quot;, corsConfiguration);
-        return new CorsWebFilter(source);
-    &#125;
-&#125;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.him.gateway.filter;
-
-import org.springframework.cloud.gateway.filter.GatewayFilterChain;
-import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.cloud.gateway.filter.NettyWriteResponseFilter;
-import org.springframework.core.Ordered;
-import org.springframework.http.HttpHeaders;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Mono;
-
-import java.util.ArrayList;
-
-&#x2F;**
- * 跨域请求头重复处理过滤器
- *
- * @author witleo
- * @date 2021-5-20
- *&#x2F;
-public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;
-    @Override
-    public int getOrder() &#123;
-        &#x2F;&#x2F; 指定此过滤器位于NettyWriteResponseFilter之后
-        &#x2F;&#x2F; 即待处理完响应体后接着处理响应头
-        return NettyWriteResponseFilter.WRITE_RESPONSE_FILTER_ORDER + 1;
-    &#125;
-
-    @Override
-    @SuppressWarnings(&quot;serial&quot;)
-    public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) &#123;
-        return chain.filter(exchange).then(Mono.defer(() -&gt; &#123;
-            exchange.getResponse().getHeaders().entrySet().stream()
-                    .filter(kv -&gt; (kv.getValue() !&#x3D; null &amp;&amp; kv.getValue().size() &gt; 1))
-                    .filter(kv -&gt; (kv.getKey().equals(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)
-                            || kv.getKey().equals(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS)))
-                    .forEach(kv -&gt;
-                    &#123;
-                        kv.setValue(new ArrayList&lt;String&gt;() &#123;&#123;
-                            add(kv.getValue().get(0));
-                        &#125;&#125;);
-                    &#125;);
-
-            return chain.filter(exchange);
-        &#125;));
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>参考文章：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fundebug/p/10329202.html">https://www.cnblogs.com/fundebug/p/10329202.html</a></li>
-<li><a target="_blank" rel="noopener" href="https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/advanced/cors.html">https://panjiachen.gitee.io/vue-element-admin-site/zh/guide/advanced/cors.html</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.webpackjs.com/configuration/dev-server/#devserver-proxy">https://www.webpackjs.com/configuration/dev-server/#devserver-proxy</a></li>
-</ul>
-
+                
                 
             </div>
             <hr/>
@@ -541,7 +397,7 @@ public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://blog.witleo.com/2021/08/02/spring-cloud-gateway-jie-jue-kua-yu-wen-ti/">http://blog.witleo.com/2021/08/02/spring-cloud-gateway-jie-jue-kua-yu-wen-ti/</a>
+                    <a href="http://blog.witleo.com/2021/11/01/untitled-1/">http://blog.witleo.com/2021/11/01/untitled-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -578,15 +434,7 @@ public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/cloud-gateway/">
-                                    <span class="chip bg-color">cloud gateway</span>
-                                </a>
-                            
-                                <a href="/tags/%E8%B7%A8%E5%9F%9F/">
-                                    <span class="chip bg-color">跨域</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -758,7 +606,7 @@ public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/11/01/geatway-wang-guan-de-zuo-yong/">
+                <a href="/2021/11/01/untitled/">
                     <div class="card-image">
                         
                         
@@ -795,13 +643,13 @@ public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/08/02/shi-yong-maven-he-nacos-shi-xian-huan-jing-ge-chi/">
+                <a href="/2021/11/01/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie-chong-tu-wen-jian-admin-20211101103436/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="使用Maven Profile和nacos namespace+group实现环境隔离">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">使用Maven Profile和nacos namespace+group实现环境隔离</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -812,31 +660,15 @@ public class CorsResponseHeaderFilter implements GlobalFilter, Ordered &#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-01
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" class="post-category">
-                                    乱七八糟
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            witleo
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Nacos/">
-                        <span class="chip bg-color">Nacos</span>
-                    </a>
-                    
-                    <a href="/tags/Maven/">
-                        <span class="chip bg-color">Maven</span>
-                    </a>
-                    
                 </div>
                 
             </div>

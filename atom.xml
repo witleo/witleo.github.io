@@ -6,7 +6,7 @@
   <link href="http://blog.witleo.com/atom.xml" rel="self"/>
   
   <link href="http://blog.witleo.com/"/>
-  <updated>2021-08-10T02:31:26.304Z</updated>
+  <updated>2021-11-01T03:42:22.480Z</updated>
   <id>http://blog.witleo.com/</id>
   
   <author>
@@ -15,6 +15,154 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>若依系统权限认证过程详解</title>
+    <link href="http://blog.witleo.com/2021/11/01/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie/"/>
+    <id>http://blog.witleo.com/2021/11/01/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie/</id>
+    <published>2021-11-01T08:25:00.000Z</published>
+    <updated>2021-11-01T03:42:22.480Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="乱七八糟" scheme="http://blog.witleo.com/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/"/>
+    
+    
+    <category term="博客" scheme="http://blog.witleo.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="权限认证" scheme="http://blog.witleo.com/tags/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>若依系统权限认证过程详解</title>
+    <link href="http://blog.witleo.com/2021/11/01/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie-chong-tu-wen-jian-liaoyuxing-20211101105757/"/>
+    <id>http://blog.witleo.com/2021/11/01/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie-chong-tu-wen-jian-liaoyuxing-20211101105757/</id>
+    <published>2021-11-01T08:25:00.000Z</published>
+    <updated>2021-11-01T02:57:57.875Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="乱七八糟" scheme="http://blog.witleo.com/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/"/>
+    
+    
+    <category term="博客" scheme="http://blog.witleo.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="权限认证" scheme="http://blog.witleo.com/tags/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://blog.witleo.com/2021/11/01/untitled/"/>
+    <id>http://blog.witleo.com/2021/11/01/untitled/</id>
+    <published>2021-11-01T03:55:48.700Z</published>
+    <updated>2021-11-01T02:32:06.000Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://blog.witleo.com/2021/11/01/untitled-1/"/>
+    <id>http://blog.witleo.com/2021/11/01/untitled-1/</id>
+    <published>2021-11-01T03:55:48.700Z</published>
+    <updated>2021-11-01T03:43:31.000Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://blog.witleo.com/2021/11/01/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie-chong-tu-wen-jian-admin-20211101103436/"/>
+    <id>http://blog.witleo.com/2021/11/01/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie-chong-tu-wen-jian-admin-20211101103436/</id>
+    <published>2021-11-01T03:55:48.697Z</published>
+    <updated>2021-11-01T02:33:30.000Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://blog.witleo.com/2021/11/01/geatway-wang-guan-de-zuo-yong-chong-tu-wen-jian-liaoyuxing-20211101114622/"/>
+    <id>http://blog.witleo.com/2021/11/01/geatway-wang-guan-de-zuo-yong-chong-tu-wen-jian-liaoyuxing-20211101114622/</id>
+    <published>2021-11-01T03:55:48.696Z</published>
+    <updated>2021-11-01T03:46:22.775Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;一、API网关概述&quot;&gt;&lt;a href=&quot;#一、API网关概述&quot; class=&quot;headerlink&quot; title=&quot;一、API网关概述&quot;&gt;&lt;/a&gt;一、API网关概述&lt;/h3&gt;&lt;h4 id=&quot;1、什么是API网关&quot;&gt;&lt;a href=&quot;#1、什么是API网关&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://blog.witleo.com/2021/11/01/geatway-wang-guan-de-zuo-yong-chong-tu-wen-jian-admin-20211101114549/"/>
+    <id>http://blog.witleo.com/2021/11/01/geatway-wang-guan-de-zuo-yong-chong-tu-wen-jian-admin-20211101114549/</id>
+    <published>2021-11-01T03:55:48.695Z</published>
+    <updated>2021-11-01T03:44:48.000Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://blog.witleo.com/2021/11/01/geatway-wang-guan-de-zuo-yong/"/>
+    <id>http://blog.witleo.com/2021/11/01/geatway-wang-guan-de-zuo-yong/</id>
+    <published>2021-11-01T03:55:48.693Z</published>
+    <updated>2021-11-01T03:55:37.519Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、API网关概述&quot;&gt;&lt;a href=&quot;#一、API网关概述&quot; class=&quot;headerlink&quot; title=&quot;一、API网关概述&quot;&gt;&lt;/a&gt;一、API网关概述&lt;/h2&gt;&lt;h3 id=&quot;1、什么是API网关&quot;&gt;&lt;a href=&quot;#1、什么是API网关&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>spring cloud gateway解决跨域问题</title>
