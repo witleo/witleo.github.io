@@ -410,7 +410,7 @@
 <h5 id="（4）API网关关注点"><a href="#（4）API网关关注点" class="headerlink" title="（4）API网关关注点"></a>（4）API网关关注点</h5><blockquote>
 <p>（1）开发维护简单，节约人力成本和维护成本。<br> （2）高性能，节约设备成本，提高系统吞吐能力。<br> （3）高可用（非常重要）<br> （4）方便灵活地实现安全、验证、过滤、聚合、限流、监控等各种策略。</p>
 </blockquote>
-<h2 id="二、API网关分类"><a href="#二、API网关分类" class="headerlink" title="二、API网关分类"></a>二、API网关分类</h2><p><img src="https://gitee.com/witleo/blogimg/raw/master/img/webp.webp" alt="img"></p>
+<h2 id="二、API网关分类"><a href="#二、API网关分类" class="headerlink" title="二、API网关分类"></a>二、API网关分类</h2><p><img src="https://gitee.com/witleo/blogimg/raw/master/img/webp.webp" alt="网关分类与功能"></p>
 <ul>
 <li>如上图所示，面对互联网复杂的业务系统，基本可以将API网关分成两类：流量网关和业务网关。</li>
 </ul>
@@ -431,7 +431,7 @@
 </li>
 </ul>
 <h4 id="Spring-Cloud-Gateway"><a href="#Spring-Cloud-Gateway" class="headerlink" title="Spring Cloud Gateway"></a>Spring Cloud Gateway</h4><p>​        spring cloud gateway 作为业务网关的一种，整个作用原理如下图。</p>
-<p>![spring cloud gateway 作用原理](<a target="_blank" rel="noopener" href="https://gitee.com/witleo/blogimg/raw/master/img/image">https://gitee.com/witleo/blogimg/raw/master/img/image</a> (1).png)</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/111.png" alt="spring cloud gateway作用原理"></p>
 <p>客户端向 Spring Cloud Gateway 发出请求，如果请求与网关程序定义的路由匹配，则将其发送到网关 Web 处理程序，此处理程序运行特定的请求过滤器链。过滤器之间用虚线分开的原因是过滤器可能会在发送代理请求之前或之后执行逻辑。所有 “pre” 过滤器逻辑先执行，然后执行代理请求，代理请求完成后，执行 “post” 过滤器逻辑。</p>
 <p>参考文章：</p>
 <ul>
