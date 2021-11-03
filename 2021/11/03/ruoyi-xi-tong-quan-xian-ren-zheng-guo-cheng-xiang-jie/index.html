@@ -390,8 +390,8 @@
             <div id="articleContent">
                 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>​        由于若依的权限认证是自研开发的，所以总有小伙伴表示若依的权限认证实现过程看不懂，不清楚认证流程，再加上上周权限部分又进行了一次更新。所以我这里基于新版的权限认证详细的带大家学习一下实现过程</p>
 <p>由于项目还在不断的更新升级过程中，对相应代码可能存在再次更新调整的可能，具体代码请根据现有版本代码自行判断</p>
-<p>本文章基于若依微服务3.7版本，2021.11.1日发布</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​        框架中为什么没有使用Spring Security OAuth 2.0框架？</p>
+<p>本文章基于RuoYi-Cloud 3.7版本</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​        其实有很多人在问，框架中为什么没有使用Spring Security OAuth 2.0框架？</p>
 <p>​        这个问题其实是一个无奈的历史问题，其实我们在Git提交记录上可以看到，早期的若依版本其实使用了Spring Security OAuth 2.0框架的，但是在一次更新时移除了OAuth 2.0</p>
 <p><img src="https://gitee.com/witleo/blogimg/raw/master/img/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211101112911.png" alt="Git版本更新说明"></p>
 <p>​        原因是因为若依的作者早期使用的是PigCloud框架中的OAuth 2.0实现，但是后来与PigCloud的作者对源码授权产生了纠纷，被指控不遵守LGPL3.0协议，商业版本，违规、盗版使用。作者一气之下就移除了OAuth2全部权限代码</p>
