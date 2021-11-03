@@ -6,7 +6,7 @@
   <link href="http://blog.witleo.com/atom.xml" rel="self"/>
   
   <link href="http://blog.witleo.com/"/>
-  <updated>2021-11-01T04:41:00.684Z</updated>
+  <updated>2021-11-03T05:25:13.540Z</updated>
   <id>http://blog.witleo.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>若依系统权限认证过程详解</title>
+    <link href="http://blog.witleo.com/2021/11/03/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie/"/>
+    <id>http://blog.witleo.com/2021/11/03/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie/</id>
+    <published>2021-11-03T04:34:00.000Z</published>
+    <updated>2021-11-03T05:25:13.540Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;​       </summary>
+        
+      
+    
+    
+    
+    <category term="权限认证" scheme="http://blog.witleo.com/categories/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/"/>
+    
+    
+    <category term="博客" scheme="http://blog.witleo.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="权限认证" scheme="http://blog.witleo.com/tags/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Cloud Gateway-网关的作用</title>

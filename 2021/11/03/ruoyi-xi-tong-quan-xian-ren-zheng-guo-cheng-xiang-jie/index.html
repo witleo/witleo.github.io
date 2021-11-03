@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring Cloud Gateway-网关的作用, null">
+    <meta name="keywords" content="若依系统权限认证过程详解, null">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Spring Cloud Gateway-网关的作用 | null</title>
+    <title>若依系统权限认证过程详解 | null</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -204,12 +204,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Spring Cloud Gateway-网关的作用</h1>
+                    <h1 class="description center-align post-title">若依系统权限认证过程详解</h1>
                 </div>
             </div>
         </div>
@@ -325,12 +325,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Spring-Cloud-Gateway/">
-                                <span class="chip bg-color">Spring Cloud Gateway</span>
+                            <a href="/tags/%E5%8D%9A%E5%AE%A2/">
+                                <span class="chip bg-color">博客</span>
                             </a>
                         
-                            <a href="/tags/%E7%BD%91%E5%85%B3/">
-                                <span class="chip bg-color">网关</span>
+                            <a href="/tags/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/">
+                                <span class="chip bg-color">权限认证</span>
                             </a>
                         
                     </div>
@@ -341,8 +341,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Spring/" class="post-category">
-                                Spring
+                            <a href="/categories/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/" class="post-category">
+                                权限认证
                             </a>
                         
                     </div>
@@ -354,7 +354,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-01
+                    2021-11-03
                 </div>
                 
 
@@ -363,14 +363,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    10 分
                 </div>
                 
 
@@ -388,56 +388,233 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、API网关概述"><a href="#一、API网关概述" class="headerlink" title="一、API网关概述"></a>一、API网关概述</h2><h3 id="1、什么是API网关"><a href="#1、什么是API网关" class="headerlink" title="1、什么是API网关"></a>1、什么是API网关</h3><h4 id="（1）为啥需要API网关"><a href="#（1）为啥需要API网关" class="headerlink" title="（1）为啥需要API网关"></a>（1）为啥需要API网关</h4><blockquote>
-<p>计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决。<br>— David Wheeler</p>
-</blockquote>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>​        由于若依的权限认证是自研开发的，所以总有小伙伴表示若依的权限认证实现过程看不懂，不清楚认证流程，再加上上周权限部分又进行了一次更新。所以我这里基于新版的权限认证详细的带大家学习一下实现过程</p>
+<p>由于项目还在不断的更新升级过程中，对相应代码可能存在再次更新调整的可能，具体代码请根据现有版本代码自行判断</p>
+<p>本文章基于若依微服务3.7版本，2021.11.1日发布</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​        框架中为什么没有使用Spring Security OAuth 2.0框架？</p>
+<p>​        这个问题其实是一个无奈的历史问题，其实我们在Git提交记录上可以看到，早期的若依版本其实使用了Spring Security OAuth 2.0框架的，但是在一次更新时移除了OAuth 2.0</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211101112911.png" alt="Git版本更新说明"></p>
+<p>​        原因是因为若依的作者早期使用的是PigCloud框架中的OAuth 2.0实现，但是后来与PigCloud的作者对源码授权产生了纠纷，被指控不遵守LGPL3.0协议，商业版本，违规、盗版使用。作者一气之下就移除了OAuth2全部权限代码</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211101112636062.png" alt="作者在gitee上的说明"></p>
+<p>事件发展过程+双方陈述：<a target="_blank" rel="noopener" href="https://gitee.com/y_project/RuoYi-Cloud/issues/I1TIJO">https://gitee.com/y_project/RuoYi-Cloud/issues/I1TIJO</a></p>
+<p>具体过程我也不甚清楚，也希望大家遵从作者的意愿，不讨论、不吃瓜</p>
+<h2 id="权限实现"><a href="#权限实现" class="headerlink" title="权限实现"></a>权限实现</h2><p>在框架中的权限我姑且将其分为三个部分：接口认证权限、数据认证权限和内部认证权限</p>
+<p>其中接口认证权限使用注解@RequiresPermissions、@RequiresLogin和@RequiresRoles实现，数据认证权限使用注解@DataScope实现，内部认证权限使用@InnerAuth实现</p>
+<p>注：早期接口权限使用的注解为@PreAuthorize，作者于2021.10.16进行了一次优化，将其拆分为RequiresLogin、RequiresRoles、RequiresPermissions，并将所有的@PreAuthorize注解替换为了@RequiresPermissions注解。</p>
+<p>如果你使用的是较早的版本，可以简单理解为@PreAuthorize = @RequiresPermissions</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211102093232406.png" alt="Git更新日志"></p>
+<p>然后我们通过代码的注释可以看出，@RequiresLogin、@RequiresPermissions和@RequiresRoles分别对应的是登录认证、权限认证和角色认证</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 登录认证：只有登录之后才能进入该方法
+ * 
+ * @author ruoyi
+ *
+ *&#x2F;
+@Retention(RetentionPolicy.RUNTIME)
+@Target(&#123; ElementType.METHOD, ElementType.TYPE &#125;)
+public @interface RequiresLogin
+&#123;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 权限认证：必须具有指定权限才能进入该方法
+ * 
+ * @author ruoyi
+ *
+ *&#x2F;
+@Retention(RetentionPolicy.RUNTIME)
+@Target(&#123; ElementType.METHOD, ElementType.TYPE &#125;)
+public @interface RequiresPermissions
+&#123;
+    &#x2F;**
+     * 需要校验的权限码
+     *&#x2F;
+    String[] value() default &#123;&#125;;
+
+    &#x2F;**
+     * 验证模式：AND | OR，默认AND
+     *&#x2F;
+    Logical logical() default Logical.AND;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 角色认证：必须具有指定角色标识才能进入该方法
+ * 
+ * @author ruoyi
+ *&#x2F;
+@Retention(RetentionPolicy.RUNTIME)
+@Target(&#123; ElementType.METHOD, ElementType.TYPE &#125;)
+public @interface RequiresRoles
+&#123;
+    &#x2F;**
+     * 需要校验的角色标识
+     *&#x2F;
+    String[] value() default &#123;&#125;;
+
+    &#x2F;**
+     * 验证逻辑：AND | OR，默认AND
+     *&#x2F;
+    Logical logical() default Logical.AND;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看出作者对接口权限进行了更细致的划分，但是目前系统中并没有使用@RequiresLogin和@RequiresRoles，应该是为我们二次开发预留的认证方式</p>
+<p>在数据认证权限方面，框架中将数据认证权限中划分为以下5个等级</p>
+<pre class="line-numbers language-none"><code class="language-none">com.ruoyi.common.datascope.aspect.DataScopeAspect
+
+   &#x2F;**
+    * 全部数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_ALL &#x3D; &quot;1&quot;;
+
+   &#x2F;**
+    * 自定数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_CUSTOM &#x3D; &quot;2&quot;;
+
+   &#x2F;**
+    * 部门数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_DEPT &#x3D; &quot;3&quot;;
+
+   &#x2F;**
+    * 部门及以下数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_DEPT_AND_CHILD &#x3D; &quot;4&quot;;
+
+   &#x2F;**
+    * 仅本人数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_SELF &#x3D; &quot;5&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>数据权限是与业务流程强耦合的，并非所有查询都能适用，必须满足一定条件(即查询结果必须存在依赖项，双方有关联)</p>
+<p>不满足耦合条件的查询，只能设置为全部数据权限</p>
 <ul>
-<li><p>API网关的观念其实和当前流行的SOA架构和微服务架构模式有关。在传统大型企业比较流行的SOA架构中，有一个企业服务总线（ESB）的概念，再ESB中融合了管理、注册、中介、编排、治理等功能，是一个访问高度频繁、功能高度集中的地方，因此常常也是性能瓶颈所在。而在微服务架构中，伴随着去中心化的理念，几乎没有EBS的的概念，分布式服务架构技术不再依赖于具体的服务中心容器技术（ ESB），而是将服务寻址和调用完全分开，这样就不需要通过容器作为服务代理，在运行期实现最高效的直连调用。</p>
+<li><p>自定数据权限、部门数据权限、部门及以下数据权限 依赖与部门ID</p>
 </li>
-<li><p>在微服务架构中，服务的粒度被进一步细分，各个业务服务可以被独立的设计、开发、测试、部署和管理。各个独立部署单元可以用不同的开发测试团队维护，可以使用不同的编程语言和技术平台进行设计，这就要求必须使用一种语言和平台无关的服务协议作为各个单元间的通讯方式。而REST API 由于其简单、高效、跨平台、易开发、易测试、易集成，成为了不二选择。此时如果都是采用客户端和服务器直连的话，那么此时系统就会出现大量的冗余代码和功能，维护起来工作量巨大，而且随着服务增多，出错性也大大的增加。因此一个类似综合前置的系统就产生了，这就是 API 网关（API Gateway）。API 网关作为分散在各个业务系统微服务的 API 聚合点和统一接入点，外部请求通过访问这个接入点，即可访问内部所有的 REST API 服务。</p>
+<li><p>仅本人数据权限 依赖于用户ID</p>
+</li>
+<li><p>全部数据权限 无依赖项</p>
 </li>
 </ul>
-<h5 id="（2）API网关定义"><a href="#（2）API网关定义" class="headerlink" title="（2）API网关定义"></a>（2）API网关定义</h5><blockquote>
-<p>网关的角色是作为一个 API 架构，用来保护、增强和控制对于 API 服务的访问。</p>
-</blockquote>
+<p>总结：框架中的权限认证使用基于 Spring Aop 的注解鉴权，包含了5种注解实现</p>
 <ul>
-<li>API 网关是一个处于应用程序或服务（提供 REST API 接口服务）之前的系统，用来管理授权、访问控制和流量限制等，这样 REST API 接口服务就被 API 网关保护起来，对所有的调用者透明。因此，隐藏在 API 网关后面的业务系统就可以专注于创建和管理服务，而不用去处理这些策略性的基础设施。</li>
-<li>通俗的说API网关中就是做一些通用的基础设施功能。类似AOP中的横切关注点概念，把业务系统中涉及的一些通用功能（日志分析、鉴权、路由等）抽取到API网关中统一管理。API 网关不是一个典型的业务系统， 而是一个为了让业务系统更专注与业务服务本身，给API服务提供更多附加能力的一个中间层。</li>
+<li><p>接口认证权限：@RequiresPermissions、@RequiresLogin、@RequiresRoles</p>
+</li>
+<li><p>数据认证权限：@DataScope</p>
+</li>
+<li><p>内部认证权限：@InnerAuth</p>
+</li>
 </ul>
-<h5 id="（3）API网关的四大职能"><a href="#（3）API网关的四大职能" class="headerlink" title="（3）API网关的四大职能"></a>（3）API网关的四大职能</h5><blockquote>
-<p><strong>请求接入：</strong>作为所有 API 接口服务请求的接入点，管理所有的接入请求；<br> <strong>业务聚合：</strong>作为所有后端业务服务的聚合点，所有的业务服务都可以在这里被调用；<br> <strong>中介策略：</strong>实现安全、验证、路由、过滤、流控，缓存等策略，进行一些必要的中介处理；<br> <strong>统一管理：</strong>提供配置管理工具，对所有 API 服务的调用生命周期和相应的中介策略进行统一管理。</p>
+<h3 id="接口认证权限"><a href="#接口认证权限" class="headerlink" title="接口认证权限"></a>接口认证权限</h3><p>由于在系统中新增的注解@RequiresLogin和@RequiresRoles目前没有使用，所以暂时不做讨论，我们只来聊一聊@RequiresPermissions</p>
+<p>我们来进行一次完整的请求访问过程模拟</p>
+<ol>
+<li><p>在系统管理中为用户赋予角色，为角色赋予权限</p>
+</li>
+<li><p>在Controller中，通过@RequiresPermissions为接口方法声明所属权限</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103083216360.png" alt="@RequiresPermissions的使用方式"></p>
+<p>登录后我们可以在Redis中看到所存放的用户信息</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211102103220185.png" alt="Redis中的用户信息"></p>
+<p>通过Redis中的数据可以看出，我刚刚为一名用户赋予了leader的角色，角色中包含用户管理的新增、删除、修改和查询等接口权限</p>
+</li>
+</ol>
+<h4 id="认证过程："><a href="#认证过程：" class="headerlink" title="认证过程："></a>认证过程：</h4><ol>
+<li><p>Gateway网关登录鉴权</p>
+<p>前端发送的http请求进入Gateway网关模块，首先进入黑名单、验证码和缓存请求等几个过滤器进行一些数据处理，随后进入com.ruoyi.gateway.filter.AuthFilter全局过滤器，进行登录鉴权</p>
+<blockquote>
+<p>全局过滤器作用于所有的路由，不需要单独配置，我们可以用它来实现很多统一化处理的业务需求，比如权限认证，IP访问限制等等。目前网关统一鉴权<code>AuthFilter.java</code>就是采用的全局过滤器。</p>
+<p>单独定义只需要实现<code>GlobalFilter</code>, <code>Ordered</code>这两个接口就可以了。</p>
 </blockquote>
-<h5 id="（4）API网关关注点"><a href="#（4）API网关关注点" class="headerlink" title="（4）API网关关注点"></a>（4）API网关关注点</h5><blockquote>
-<p>（1）开发维护简单，节约人力成本和维护成本。<br> （2）高性能，节约设备成本，提高系统吞吐能力。<br> （3）高可用（非常重要）<br> （4）方便灵活地实现安全、验证、过滤、聚合、限流、监控等各种策略。</p>
-</blockquote>
-<h2 id="二、API网关分类"><a href="#二、API网关分类" class="headerlink" title="二、API网关分类"></a>二、API网关分类</h2><p><img src="https://gitee.com/witleo/blogimg/raw/master/img/webp.webp" alt="网关分类与功能"></p>
+<p>AuthFilter登录鉴权这里主要完成三件事</p>
 <ul>
-<li>如上图所示，面对互联网复杂的业务系统，基本可以将API网关分成两类：流量网关和业务网关。</li>
+<li><p>判断请求目标是否在白名单内</p>
+</li>
+<li><p>验证token是否有效</p>
+</li>
+<li><p>将一部分用户信息添加到Header中</p>
+</li>
 </ul>
-<p><strong>流量网关：</strong>跟具体的后端业务系统和服务完全无关的部分，比如安全策略、全局性流控策略、流量分发策略等。流量网关的功能跟 Web 应用防火墙（WAF）非常类似。WAF一般是基于 Nginx/OpenResty 的 ngx_lua 模块开发的 Web 应用防火墙。</p>
-<p><strong>业务网关：</strong>针对具体的后端业务系统，或者是服务和业务有一定关联性的部分，并且一般被直接部署在业务服务的前面。业务网关一般部署在流量网关之后，业务系统之前，比流量网关更靠近系统。我们大部分情况下说的 API 网关，狭义上指的是业务网关。并且如果系统的规模不大，我们也会将两者合二为一，使用一个网关来处理所有的工作</p>
-<h3 id="什么是业务网关"><a href="#什么是业务网关" class="headerlink" title="什么是业务网关"></a>什么是业务网关</h3><pre class="line-numbers language-plain" data-language="plain"><code class="language-plain">服务网关 = 路由转发 + 过滤器<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103084043099.png" alt="AuthFilter过滤器代码"></p>
+<p>进入到过滤器中，首先验证请求目标地址是否符合白名单内的匹配规则(<a target="_blank" rel="noopener" href="http://doc.ruoyi.vip/ruoyi-cloud/cloud/gateway.html#%E7%99%BD%E5%90%8D%E5%8D%95%E9%85%8D%E7%BD%AE">白名单配置</a>)，匹配规则如下</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103084236824.png" alt="白名单匹配规则"></p>
+<p>通过匹配(在白名单内)则通过登录鉴权，接口无需登录既可访问，不在白名单内则进入下一步，进行token有效验证</p>
+<p>最新版本的token已经改成了JWT模式，JWT对比token最大的好处就是验证时不需要访问数据库</p>
+<p>但是JWT是去中心化的，无法进行废弃(在有效期截止前无法退出登录)，所以若依这里还是通过Redis进行了一次登录判断。有兴趣的小伙伴可以了解一下JWT的原理</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103124414368.png" alt="验证token是否有效"></p>
+<p>在通过token验证之后，将当前登录用户的一些信息添加到Header中，向下个微服务传递</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103092214167.png" alt="添加用户信息到Header中"></p>
+<p>这样在其他微服务中就可以通过直接获取Header，来获得当前登录用户的信息</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>使用注解@RequiresPermissions进行接口鉴权</p>
+<p>首先系统在com.ruoyi.common.security.aspect.PreAuthorizeAspect中定义切点</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103093013594.png" alt="定义AOP签名"></p>
+<p>在spring.factories中添加自动装配</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103093117020.png" alt="自动装配"></p>
+<p>AOP定义完成后，当请求进入带有注解@RequiresPermissions的接口时，就会进行进入切面进行接口鉴权</p>
+<p>依次对@RequiresLogin、@RequiresRoles和@RequiresPermissions进行校验</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103112956827.png" alt="注解鉴权"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103124733873.png" alt="@RequiresPermissions的校验"></p>
+<p>当注解@RequiresPermissions中包含多个接口权限时，可以指定验证模式(默认为AND)</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103113440403.png" alt="验证模式默认为AND"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103113241682.png" alt="判断鉴权模式"></p>
+<p>按照一定规则(OR | AND)，判断权限列表中是否拥有当前访问接口的权限</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103113558996.png" alt="以AND模式进行鉴权验证"></p>
+<p>校验不通过则抛出异常，接口返回鉴权失败的错误信息</p>
+<p>校验通过，既接口认证鉴权完成，进入接口方法</p>
+<h3 id="数据认证权限"><a href="#数据认证权限" class="headerlink" title="数据认证权限"></a>数据认证权限</h3><p>数据认证权限的本质，其实就是在你查询结果的基础上，按照设定的权限等级，在你的查询SQL尾部拼接一段过滤SQL</p>
+<p>举个栗子：</p>
+<p>这是系统中的一个查询用户列表的接口，接口定义了数据权限</p>
+<p>其中deptAlias表示部门表的别名，userAlias表示用户表的别名，这个别名后面时会用到</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 根据条件分页查询用户列表
+ * 
+ * @param user 用户信息
+ * @return 用户信息集合信息
+ *&#x2F;
+@Override
+@DataScope(deptAlias &#x3D; &quot;d&quot;, userAlias &#x3D; &quot;u&quot;)
+public List&lt;SysUser&gt; selectUserList(SysUser user)
+&#123;
+    return userMapper.selectUserList(user);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
-<ul>
-<li><p><strong>请求接入：</strong>作为所有 API 接口服务请求的接入点，管理所有的接入请求；</p>
-</li>
-<li><p><strong>业务聚合：</strong>作为所有后端业务服务的聚合点，所有的业务服务都可以在这里被调用；</p>
-</li>
-<li><p><strong>中介策略：</strong>实现安全、验证、路由、过滤、流控，缓存等策略，进行一些必要的中介处理；</p>
-</li>
-<li><p><strong>统一管理：</strong>提供配置管理工具，对所有 API 服务的调用生命周期和相应的中介策略进行统一管理。</p>
-</li>
-</ul>
-<h4 id="Spring-Cloud-Gateway"><a href="#Spring-Cloud-Gateway" class="headerlink" title="Spring Cloud Gateway"></a>Spring Cloud Gateway</h4><p>​        spring cloud gateway 作为业务网关的一种，整个作用原理如下图。</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/111.png" alt="spring cloud gateway作用原理"></p>
-<p>客户端向 Spring Cloud Gateway 发出请求，如果请求与网关程序定义的路由匹配，则将其发送到网关 Web 处理程序，此处理程序运行特定的请求过滤器链。过滤器之间用虚线分开的原因是过滤器可能会在发送代理请求之前或之后执行逻辑。所有 “pre” 过滤器逻辑先执行，然后执行代理请求，代理请求完成后，执行 “post” 过滤器逻辑。</p>
-<p>参考文章：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.yuque.com/pig4cloud/pig/pkv4iy">gateway 业务网关作用</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a2f292221b5c">微服务网关</a></li>
-</ul>
+<p>我为查询用户设置数据权限为[仅本人数据权限]时</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103130139377.png" alt="分配数据权限"></p>
+<p>加权限前的SQL</p>
+<pre class="line-numbers language-none"><code class="language-none">select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
+		left join sys_dept d on u.dept_id &#x3D; d.dept_id
+		where u.del_flag &#x3D; &#39;0&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>加权限后的SQL</p>
+<pre class="line-numbers language-none"><code class="language-none">select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
+		left join sys_dept d on u.dept_id &#x3D; d.dept_id
+		where u.del_flag &#x3D; &#39;0&#39;
+		AND ( &#123;&#125;.user_id &#x3D; &#123;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们可以看到，加权限后的SQL，在尾部多了一段SQL 【 AND ( {}.user_id = {}) 】</p>
+<p>其中第一个{}表示在接口注解中定义的userAlias别名，第二个{}表示当前登录用户的ID</p>
+<p>转义后的结果就是【 AND ( u.user_id = 1) 】</p>
+<p>OK,再让我们把权限设置为[本部门数据权限]，进行一下对比</p>
+<p>加权限前的SQL</p>
+<pre class="line-numbers language-none"><code class="language-none">select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
+		left join sys_dept d on u.dept_id &#x3D; d.dept_id
+		where u.del_flag &#x3D; &#39;0&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>加权限后的SQL</p>
+<pre class="line-numbers language-none"><code class="language-none">select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
+		left join sys_dept d on u.dept_id &#x3D; d.dept_id
+		where u.del_flag &#x3D; &#39;0&#39;
+		 AND ( &#123;&#125;.dept_id &#x3D; &#123;&#125; )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>看到这里，我觉得已经不用再解释了，尾部SQL的转义后的结果就是【 AND ( d.dept_id = 226)  】</p>
+<p>同理，其他权限范围的实现方式也是一样，在原有的查询SQL基础上，在SQL尾部进行一段SQL注入来实现数据权限的过滤</p>
+<p>原理就是这么简单，接下看我们看一下实现过程</p>
+<h4 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h4><p>写累了，未完待续~</p>
 
                 
             </div>
@@ -464,7 +641,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://blog.witleo.com/2021/11/01/geatway-wang-guan-de-zuo-yong/">http://blog.witleo.com/2021/11/01/geatway-wang-guan-de-zuo-yong/</a>
+                    <a href="http://blog.witleo.com/2021/11/03/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie/">http://blog.witleo.com/2021/11/03/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -502,12 +679,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Spring-Cloud-Gateway/">
-                                    <span class="chip bg-color">Spring Cloud Gateway</span>
+                                <a href="/tags/%E5%8D%9A%E5%AE%A2/">
+                                    <span class="chip bg-color">博客</span>
                                 </a>
                             
-                                <a href="/tags/%E7%BD%91%E5%85%B3/">
-                                    <span class="chip bg-color">网关</span>
+                                <a href="/tags/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/">
+                                    <span class="chip bg-color">权限认证</span>
                                 </a>
                             
                         </div>
@@ -677,9 +854,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/11/03/ruoyi-xi-tong-quan-xian-ren-zheng-guo-cheng-xiang-jie/">
                     <div class="card-image">
@@ -697,9 +875,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -712,6 +890,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -734,13 +913,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/08/02/spring-cloud-gateway-jie-jue-kua-yu-wen-ti/">
+                <a href="/2021/11/01/geatway-wang-guan-de-zuo-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="spring cloud gateway解决跨域问题">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Spring Cloud Gateway-网关的作用">
                         
-                        <span class="card-title">spring cloud gateway解决跨域问题</span>
+                        <span class="card-title">Spring Cloud Gateway-网关的作用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -751,14 +930,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-01
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" class="post-category">
-                                    乱七八糟
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
                                 </a>
                             
                             
@@ -768,12 +947,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/cloud-gateway/">
-                        <span class="chip bg-color">cloud gateway</span>
+                    <a href="/tags/Spring-Cloud-Gateway/">
+                        <span class="chip bg-color">Spring Cloud Gateway</span>
                     </a>
                     
-                    <a href="/tags/%E8%B7%A8%E5%9F%9F/">
-                        <span class="chip bg-color">跨域</span>
+                    <a href="/tags/%E7%BD%91%E5%85%B3/">
+                        <span class="chip bg-color">网关</span>
                     </a>
                     
                 </div>
