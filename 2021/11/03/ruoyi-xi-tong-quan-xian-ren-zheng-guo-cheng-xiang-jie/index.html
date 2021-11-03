@@ -370,7 +370,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    7 分
                 </div>
                 
 
@@ -395,13 +395,13 @@
 <p>​        这个问题其实是一个无奈的历史问题，其实我们在Git提交记录上可以看到，早期的若依版本其实使用了Spring Security OAuth 2.0框架的，但是在一次更新时移除了OAuth 2.0</p>
 <p><img src="https://gitee.com/witleo/blogimg/raw/master/img/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211101112911.png" alt="Git版本更新说明"></p>
 <p>​        原因是因为若依的作者早期使用的是PigCloud框架中的OAuth 2.0实现，但是后来与PigCloud的作者对源码授权产生了纠纷，被指控不遵守LGPL3.0协议，商业版本，违规、盗版使用。作者一气之下就移除了OAuth2全部权限代码</p>
-<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211101112636062.png" alt="image-20211101112636062"></p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211101112636062.png" alt="作者在gitee上的说明"></p>
 <p>事件发展过程+双方陈述：<a target="_blank" rel="noopener" href="https://gitee.com/y_project/RuoYi-Cloud/issues/I1TIJO">https://gitee.com/y_project/RuoYi-Cloud/issues/I1TIJO</a></p>
 <p>具体过程我也不甚清楚，也希望大家遵从作者的意愿，不讨论、不吃瓜</p>
-<h2 id="权限实现"><a href="#权限实现" class="headerlink" title="权限实现"></a>权限实现</h2><p>​        在框架中的权限我姑且将其分为三个部分：接口认证权限、数据认证权限和内部认证权限</p>
+<h2 id="权限实现"><a href="#权限实现" class="headerlink" title="权限实现"></a>权限实现</h2><p>在框架中的权限我姑且将其分为三个部分：接口认证权限、数据认证权限和内部认证权限</p>
 <p>其中接口认证权限使用注解@RequiresPermissions、@RequiresLogin和@RequiresRoles实现，数据认证权限使用注解@DataScope实现，内部认证权限使用@InnerAuth实现</p>
 <p>注：早期接口权限使用的注解为@PreAuthorize，作者于2021.10.16进行了一次优化，将其拆分为RequiresLogin、RequiresRoles、RequiresPermissions，并将所有的@PreAuthorize注解替换为了@RequiresPermissions注解。</p>
-<p>如果你的版本不一致，可以简单理解为@PreAuthorize = @RequiresPermissions</p>
+<p>如果你使用的是较早的版本，可以简单理解为@PreAuthorize = @RequiresPermissions</p>
 <p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211102093232406.png" alt="Git更新日志"></p>
 <p>然后我们通过代码的注释可以看出，@RequiresLogin、@RequiresPermissions和@RequiresRoles分别对应的是登录认证、权限认证和角色认证</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;**
@@ -458,31 +458,33 @@ public @interface RequiresRoles
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>可以看出作者对接口权限进行了更细致的划分，但是目前系统中并没有使用@RequiresLogin和@RequiresRoles，应该是为我们二次开发预留的认证方式</p>
-<p>​        在框架中将数据认证权限中划分为以下5个等级</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
- * 全部数据权限
- *&#x2F;
-public static final String DATA_SCOPE_ALL &#x3D; &quot;1&quot;;
+<p>在数据认证权限方面，框架中将数据认证权限中划分为以下5个等级</p>
+<pre class="line-numbers language-none"><code class="language-none">com.ruoyi.common.datascope.aspect.DataScopeAspect
 
-&#x2F;**
- * 自定数据权限
- *&#x2F;
-public static final String DATA_SCOPE_CUSTOM &#x3D; &quot;2&quot;;
+   &#x2F;**
+    * 全部数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_ALL &#x3D; &quot;1&quot;;
 
-&#x2F;**
- * 部门数据权限
- *&#x2F;
-public static final String DATA_SCOPE_DEPT &#x3D; &quot;3&quot;;
+   &#x2F;**
+    * 自定数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_CUSTOM &#x3D; &quot;2&quot;;
 
-&#x2F;**
- * 部门及以下数据权限
- *&#x2F;
-public static final String DATA_SCOPE_DEPT_AND_CHILD &#x3D; &quot;4&quot;;
+   &#x2F;**
+    * 部门数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_DEPT &#x3D; &quot;3&quot;;
 
-&#x2F;**
- * 仅本人数据权限
- *&#x2F;
-public static final String DATA_SCOPE_SELF &#x3D; &quot;5&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+   &#x2F;**
+    * 部门及以下数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_DEPT_AND_CHILD &#x3D; &quot;4&quot;;
+
+   &#x2F;**
+    * 仅本人数据权限
+    *&#x2F;
+   public static final String DATA_SCOPE_SELF &#x3D; &quot;5&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>数据权限是与业务流程强耦合的，并非所有查询都能适用，必须满足一定条件(即查询结果必须存在依赖项，双方有关联)</p>
 <p>不满足耦合条件的查询，只能设置为全部数据权限</p>
