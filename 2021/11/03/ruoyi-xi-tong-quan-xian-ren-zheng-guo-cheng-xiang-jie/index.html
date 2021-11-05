@@ -325,8 +325,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%8D%9A%E5%AE%A2/">
-                                <span class="chip bg-color">博客</span>
+                            <a href="/tags/%E8%8B%A5%E4%BE%9D/">
+                                <span class="chip bg-color">若依</span>
                             </a>
                         
                             <a href="/tags/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/">
@@ -341,8 +341,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/" class="post-category">
-                                权限认证
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-category">
+                                学习记录
                             </a>
                         
                     </div>
@@ -363,14 +363,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.6k
+                    3.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    13 分
                 </div>
                 
 
@@ -565,7 +565,8 @@ public @interface RequiresRoles
 <p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103113558996.png" alt="以AND模式进行鉴权验证"></p>
 <p>校验不通过则抛出异常，接口返回鉴权失败的错误信息</p>
 <p>校验通过，既接口认证鉴权完成，进入接口方法</p>
-<h3 id="数据认证权限"><a href="#数据认证权限" class="headerlink" title="数据认证权限"></a>数据认证权限</h3><p>数据认证权限的本质，其实就是在你查询结果的基础上，按照设定的权限等级，在你的查询SQL尾部拼接一段过滤SQL</p>
+<h3 id="数据认证权限"><a href="#数据认证权限" class="headerlink" title="数据认证权限"></a>数据认证权限</h3><p>数据认证权限的本质，其实就是在你查询结果的基础上，按照设定的权限等级，对用户ID或部门ID增加一定的过滤条件</p>
+<p>实现方式就是在原有的查询SQL基础上，在SQL中的Where条件尾部进行一段SQL注入来实现数据权限的过滤</p>
 <p>举个栗子：</p>
 <p>这是系统中的一个查询用户列表的接口，接口定义了数据权限</p>
 <p>其中deptAlias表示部门表的别名，userAlias表示用户表的别名，这个别名后面时会用到</p>
@@ -584,9 +585,41 @@ public List&lt;SysUser&gt; selectUserList(SysUser user)
 
 
 
-<p>我为查询用户设置数据权限为[仅本人数据权限]时</p>
+<p>我为查询用户设置数据权限为[ 仅本人数据权限 ]时</p>
 <p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211103130139377.png" alt="分配数据权限"></p>
-<p>加权限前的SQL</p>
+<p>XML代码：</p>
+<pre class="line-numbers language-none"><code class="language-none">   &lt;select id&#x3D;&quot;selectUserList&quot; parameterType&#x3D;&quot;SysUser&quot; resultMap&#x3D;&quot;SysUserResult&quot;&gt;
+	select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
+	left join sys_dept d on u.dept_id &#x3D; d.dept_id
+	where u.del_flag &#x3D; &#39;0&#39;
+	&lt;if test&#x3D;&quot;userId !&#x3D; null and userId !&#x3D; 0&quot;&gt;
+		AND u.user_id &#x3D; #&#123;userId&#125;
+	&lt;&#x2F;if&gt;
+	&lt;if test&#x3D;&quot;userName !&#x3D; null and userName !&#x3D; &#39;&#39;&quot;&gt;
+		AND u.user_name like concat(&#39;%&#39;, #&#123;userName&#125;, &#39;%&#39;)
+	&lt;&#x2F;if&gt;
+	&lt;if test&#x3D;&quot;status !&#x3D; null and status !&#x3D; &#39;&#39;&quot;&gt;
+		AND u.status &#x3D; #&#123;status&#125;
+	&lt;&#x2F;if&gt;
+	&lt;if test&#x3D;&quot;phonenumber !&#x3D; null and phonenumber !&#x3D; &#39;&#39;&quot;&gt;
+		AND u.phonenumber like concat(&#39;%&#39;, #&#123;phonenumber&#125;, &#39;%&#39;)
+	&lt;&#x2F;if&gt;
+	&lt;if test&#x3D;&quot;params.beginTime !&#x3D; null and params.beginTime !&#x3D; &#39;&#39;&quot;&gt;&lt;!-- 开始时间检索 --&gt;
+		AND date_format(u.create_time,&#39;%y%m%d&#39;) &gt;&#x3D; date_format(#&#123;params.beginTime&#125;,&#39;%y%m%d&#39;)
+	&lt;&#x2F;if&gt;
+	&lt;if test&#x3D;&quot;params.endTime !&#x3D; null and params.endTime !&#x3D; &#39;&#39;&quot;&gt;&lt;!-- 结束时间检索 --&gt;
+		AND date_format(u.create_time,&#39;%y%m%d&#39;) &lt;&#x3D; date_format(#&#123;params.endTime&#125;,&#39;%y%m%d&#39;)
+	&lt;&#x2F;if&gt;
+	&lt;if test&#x3D;&quot;deptId !&#x3D; null and deptId !&#x3D; 0&quot;&gt;
+		AND (u.dept_id &#x3D; #&#123;deptId&#125; OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE find_in_set(#&#123;deptId&#125;, ancestors) ))
+	&lt;&#x2F;if&gt;
+	&lt;!-- 数据范围过滤 --&gt;
+	$&#123;params.dataScope&#125;
+&lt;&#x2F;select&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>加权限前(全部权限)的SQL</p>
 <pre class="line-numbers language-none"><code class="language-none">select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
 		left join sys_dept d on u.dept_id &#x3D; d.dept_id
 		where u.del_flag &#x3D; &#39;0&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -601,7 +634,7 @@ public List&lt;SysUser&gt; selectUserList(SysUser user)
 <p>其中第一个{}表示在接口注解中定义的userAlias别名，第二个{}表示当前登录用户的ID</p>
 <p>转义后的结果就是【 AND ( u.user_id = 1) 】</p>
 <p>OK,再让我们把权限设置为[本部门数据权限]，进行一下对比</p>
-<p>加权限前的SQL</p>
+<p>加权限前(全部权限)的SQL</p>
 <pre class="line-numbers language-none"><code class="language-none">select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
 		left join sys_dept d on u.dept_id &#x3D; d.dept_id
 		where u.del_flag &#x3D; &#39;0&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -613,9 +646,68 @@ public List&lt;SysUser&gt; selectUserList(SysUser user)
 		 AND ( &#123;&#125;.dept_id &#x3D; &#123;&#125; )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>看到这里，我觉得已经不用再解释了，尾部SQL的转义后的结果就是【 AND ( d.dept_id = 226)  】</p>
-<p>同理，其他权限范围的实现方式也是一样，在原有的查询SQL基础上，在SQL尾部进行一段SQL注入来实现数据权限的过滤</p>
+<p>同理，其他权限范围的实现方式也是一样，在原有的查询SQL基础上，在SQL的where条件尾部进行一段SQL注入来实现数据权限的过滤</p>
 <p>原理就是这么简单，接下看我们看一下实现过程</p>
-<h4 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h4><p>写累了，未完待续~</p>
+<h4 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h4><p>首先，我们在使用时通过注解@DataScope来表示接口拥有数据权限</p>
+<p>注解中定义了部门表的别名和用户表的别名，用以在执行SQL时指定别名</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;**
+ * 数据权限过滤注解
+ * 
+ * @author ruoyi
+ *&#x2F;
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface DataScope
+&#123;
+    &#x2F;**
+     * 部门表的别名
+     *&#x2F;
+    public String deptAlias() default &quot;&quot;;
+
+    &#x2F;**
+     * 用户表的别名
+     *&#x2F;
+    public String userAlias() default &quot;&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>系统在com.ruoyi.common.datascope.aspect.DataScopeAspect定义了数据认证权限的切面</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211105165403722.png" alt="image-20211105165403722"></p>
+<p>在spring.factories中添加自动装配</p>
+<p><img src="https://gitee.com/witleo/blogimg/raw/master/img/image-20211105165416431.png" alt="image-20211105165416431"></p>
+<p>在切面DataScopeAspect中主要完成了三件事</p>
+<ul>
+<li>清除params.dataScope参数，防止被SQL注入</li>
+<li>判断登录用户所拥有的数据权限，按照权限等级生成对应的SQL</li>
+<li>将生成的SQL注入到params.dataScope中</li>
+</ul>
+<p>最后，在具体的业务查询SQL中将 ${params.dataScope} 加入到where条件的末尾既可完成注入</p>
+<p>5种权限等级对应的注入SQL：</p>
+<pre class="line-numbers language-none"><code class="language-none">#全部数据权限
+ 不生成SQL
+#自定义数据权限
+ OR &#123;&#125;.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id &#x3D; &#123;&#125; )
+#部门数据权限
+ OR &#123;&#125;.dept_id &#x3D; &#123;&#125; 
+#部门及以下数据权限
+ OR &#123;&#125;.dept_id IN ( SELECT dept_id FROM sys_dept WHERE dept_id &#x3D; &#123;&#125; or find_in_set( &#123;&#125; , ancestors ) )
+#仅本人数据权限
+ OR &#123;&#125;.user_id &#x3D; &#123;&#125; 
+ <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+<p>写累了，未完待续~</p>
 
                 
             </div>
@@ -680,8 +772,8 @@ public List&lt;SysUser&gt; selectUserList(SysUser user)
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%8D%9A%E5%AE%A2/">
-                                    <span class="chip bg-color">博客</span>
+                                <a href="/tags/%E8%8B%A5%E4%BE%9D/">
+                                    <span class="chip bg-color">若依</span>
                                 </a>
                             
                                 <a href="/tags/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/">
@@ -883,8 +975,8 @@ public List&lt;SysUser&gt; selectUserList(SysUser user)
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/" class="post-category">
-                                    权限认证
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-category">
+                                    学习记录
                                 </a>
                             
                             
@@ -895,8 +987,8 @@ public List&lt;SysUser&gt; selectUserList(SysUser user)
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8D%9A%E5%AE%A2/">
-                        <span class="chip bg-color">博客</span>
+                    <a href="/tags/%E8%8B%A5%E4%BE%9D/">
+                        <span class="chip bg-color">若依</span>
                     </a>
                     
                     <a href="/tags/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/">
@@ -918,9 +1010,9 @@ public List&lt;SysUser&gt; selectUserList(SysUser user)
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Spring Cloud Gateway-网关的作用">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">Spring Cloud Gateway-网关的作用</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -935,27 +1027,11 @@ public List&lt;SysUser&gt; selectUserList(SysUser user)
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            witleo
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Spring-Cloud-Gateway/">
-                        <span class="chip bg-color">Spring Cloud Gateway</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%BD%91%E5%85%B3/">
-                        <span class="chip bg-color">网关</span>
-                    </a>
-                    
                 </div>
                 
             </div>
